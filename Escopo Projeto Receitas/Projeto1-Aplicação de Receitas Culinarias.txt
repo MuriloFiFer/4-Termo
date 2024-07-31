@@ -1,0 +1,9 @@
+Aplicativo de Receitas Culinárias:
+Desenvolver um aplicativo para compartilhar e buscar receitas culinárias.
+
+
+App referencias
+TudoGostoso Receitas
+Receitas Fáceis
+Aquela Receita
+Coockpad
