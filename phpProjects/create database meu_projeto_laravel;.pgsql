@@ -1,0 +1,1 @@
+create database meu_projeto_laravel;
