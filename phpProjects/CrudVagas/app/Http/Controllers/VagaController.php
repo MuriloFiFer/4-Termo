@@ -35,7 +35,7 @@ class VagaController extends Controller
             'titulo' => 'required',
             'descricao' => 'required',
             'setor' => 'required',
-            'remuneracao' => 'required|decimal',
+            'remuneracao' => 'required|numeric',
             'empresa' => 'required',
         ]);
 
@@ -64,30 +64,31 @@ class VagaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Vaga $vaga)
     { $request->update([
         'titulo' => 'required',
         'descricao' => 'required',
         'setor' => 'required',
-        'remuneracao' => 'required|decimal',
+        'remuneracao' => 'required|numeric',
         'empresa' => 'required',
     ]);
 
     Vaga::update($request->all());
 
     return redirect()->route('vagas.index')
-                     ->with('success', 'Vaga criado com sucesso.');
+                     ->with('success', 'Vaga atualizado com sucesso com sucesso.');
 }
 
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {  Vaga::delete($request->all());
+    public function destroy(Vaga $vaga)
+    { 
+        $vaga->delete();
+
 
         return redirect()->route('vagas.index')
-                         ->with('success', 'Vaga criado com sucesso.');
+            ->with('success', 'Vaga Deletado com Sucesso.');
     }
-
 }
