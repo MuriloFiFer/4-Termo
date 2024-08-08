@@ -30,8 +30,7 @@
             <td>{{ $vaga->descricao }}</td>
             <td>{{ $vaga->setor }}</td>
             <td>{{ $vaga->remuneracao }}</td>
-            <td>{{ $vaga->empresa }}</td>
-            
+            <td>{{ $vaga->empresa }}</td>            
             <td>
                 <form action="{{ route('vagas.destroy', $vaga->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('vagas.show', $vaga->id) }}">Mostrar</a>
