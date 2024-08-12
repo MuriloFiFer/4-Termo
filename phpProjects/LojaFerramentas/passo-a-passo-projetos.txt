@@ -1967,3 +1967,20 @@ ldap.max_links = -1
 
 
 1:composer create-project laravel/laravel --prefer-dist LojaFerramentas
+
+2:ao criar verificar .env e ver se criou a chave na terceira linha  caso contrario digitar comando no terminal do projeto:
+php artisan key:generate
+
+3:abrir conexção com localhost e criar banco:
+create database loja_ferramentas;
+
+4:editar linha 22 á 27 no .env (conexção com o banco)
+
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=loja_ferramentas
+DB_USERNAME=postgres
+DB_PASSWORD=postgres
+
+5:
