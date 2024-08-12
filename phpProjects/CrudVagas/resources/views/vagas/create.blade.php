@@ -25,12 +25,12 @@
         </div>
 
         <div class="form-group">
-            <label for="ndescricao">Descrição:</label>
+            <label for="descricao">Descrição:</label>
             <textarea name="descricao" class="form-control" placeholder="Descrição"></textarea>
         </div>
 
         <div class="form-group">
-            <label for="nsetor">Setor:</label>
+            <label for="setor">Setor:</label>
             <input type="text" name="setor" class="form-control" placeholder="Setor">
         </div>       
 
@@ -40,7 +40,7 @@
         </div>
 
         <div class="form-group">
-            <label for="nempresa">Empresa:</label>
+            <label for="empresa">Empresa:</label>
             <textarea name="empresa" class="form-control" placeholder="Empresa"></textarea>
         </div>
 

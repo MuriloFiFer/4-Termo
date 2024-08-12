@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('descricao');
             $table->string('setor');
             $table->decimal('remuneracao',8,2);
-            $table->string('empresas');
+            $table->string('empresa');
             $table->timestamps();
         });
     } 
@@ -31,3 +31,4 @@ return new class extends Migration
         Schema::dropIfExists('vagas');
     }
 };
+
