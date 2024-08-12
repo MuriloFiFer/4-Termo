@@ -20,6 +20,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'endereco',
+        'telefone',
+        'tipo_usuario',
     ];
 
     /**
@@ -44,4 +47,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //verifica se o usuario é um administrador
+    public function isAdmin()
+    {
+        return $this->tipo_usuario === 'administrador';
+    }
+
+    //verifica se o usuario é um cliente
+    public function isCliente()
+    {
+        return $this->tipo_usuario === 'cliente';
+    }
+    
 }

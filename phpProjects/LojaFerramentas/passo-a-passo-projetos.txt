@@ -1976,6 +1976,8 @@ create database loja_ferramentas;
 
 4:editar linha 22 á 27 no .env (conexção com o banco)
 
+//////////---------->
+
 DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
 DB_PORT=5432
@@ -1983,4 +1985,61 @@ DB_DATABASE=loja_ferramentas
 DB_USERNAME=postgres
 DB_PASSWORD=postgres
 
-5:
+//////////<----------
+
+5: Modificar Models/User.php
+
+///////---------->
+
+ protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'endereco',
+        'telefone',
+        'tipo_usuario',
+    ];
+
+    /////////<---------
+
+    6: Adicionar em Models/User.php no final
+
+//////-------->
+
+      //verifica se o usuario é um administrador
+    public function isAdmin()
+    {
+        return $this->tipo_usuario === 'administrador';
+    }
+
+    //verifica se o usuario é um cliente
+    public function isCliente()
+    {
+        return $this->tipo_usuario === 'cliente';
+    }
+
+//////<--------
+
+7: Modificar migrations/create_users.php
+
+///////--->
+
+     Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->string('endereco')->nullable();
+            $table->string('telefone')->nullable();
+            $table->enum('tipo_usuario', ['cliente', 'administrador'])->default('cliente');             
+            $table->rememberToken();
+            $table->timestamps();
+            
+        });
+
+    ////<-------
+    
+
+8: Criar e modificar os Models para Produtos e Carrinho
+
