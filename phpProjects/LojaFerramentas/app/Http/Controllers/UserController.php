@@ -50,27 +50,28 @@ class UserController extends Controller
 
 
     // Processar o registro de um novo usuário
-    public function register(Request $request)
+    public function registro(Request $request)
     {
-        $request->validate([
+        $credentials = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
+        if($credentials){     
 
-        $user = User::create([
+        $userario = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
-
-        Auth::login($user);
-
-
-        return redirect('/dashboard');
+        return redirect('/');
     }
+
+     return back()->withErros([
+        'password' => 'As credenciais não correspondem aos nossos registros.',
+     ]);
+           }
 
 
     // Realizar o logout do usuário
