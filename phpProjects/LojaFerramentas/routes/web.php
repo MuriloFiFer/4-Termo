@@ -29,8 +29,12 @@ Route::post('/login',[UserController::class, 'login'])->
 name('usuarios.registro');
 
 
-//rota para oagina interna
+//rota para opgina interna
 
 Route::get('/dashboard', function () {
     return view('usuarios.dashboard');
 })->middleware('auth')->name('usuarios.dashboard');
+
+
+//rota do logout
+Route::post('/logout', [UserController::class, 'logout']);
