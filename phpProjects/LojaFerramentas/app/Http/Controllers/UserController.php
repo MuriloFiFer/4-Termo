@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 
-
-
 class UserController extends Controller
 {
     // Exibir o formulário de login
@@ -52,26 +50,24 @@ class UserController extends Controller
     // Processar o registro de um novo usuário
     public function registro(Request $request)
     {
-        $credentials = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        if($credentials){     
 
-        $userario = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-        return redirect('/');
+       
+            $usuario = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+
+            Auth::login($usuario);//já autentico o usuario
+
+            return redirect('/dashboard');//redireciono para dashboard
     }
-
-     return back()->withErros([
-        'password' => 'As credenciais não correspondem aos nossos registros.',
-     ]);
-           }
 
 
     // Realizar o logout do usuário
