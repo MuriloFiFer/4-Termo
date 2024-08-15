@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserController;use App\Http\Controllers\ProdutoController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
@@ -26,7 +26,7 @@ name('usuarios.login');
 
 //rota para processar o login
 Route::post('/login',[UserController::class, 'login'])->
-name('usuarios.registro');
+name('usuarios.login');
 
 
 //rota para opgina interna
@@ -38,3 +38,7 @@ Route::get('/dashboard', function () {
 
 //rota do logout
 Route::post('/logout', [UserController::class, 'logout']);
+
+//rota para produtos
+Route::resource('produtos', ProdutoController::class)->middleware('auth');
+

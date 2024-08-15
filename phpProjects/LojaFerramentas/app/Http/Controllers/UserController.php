@@ -62,11 +62,9 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-            ]);
+            ]);      
 
-            Auth::login($usuario);//já autentico o usuario
-
-            return redirect('/dashboard');//redireciono para dashboard
+            return redirect('/');//redireciono para dashboard
     }
 
 
@@ -78,7 +76,6 @@ class UserController extends Controller
 
         $request->session()->regenerateToken();
         $request->session()->invalidate();
-
 
         return redirect('/');
     }

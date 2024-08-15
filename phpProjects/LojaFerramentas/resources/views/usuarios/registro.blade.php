@@ -1,8 +1,5 @@
-
 {{-- formularios de cadastro --}}
 @extends('layouts.app')
-
-
 
 
 @section('content')
@@ -19,8 +16,6 @@
         </div>
 
 
-
-
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" name="email" class="form-control @error('email')is-invalid @enderror" value="{{old('email')}}" required>
@@ -28,9 +23,6 @@
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
-       
-
-
 
 
         <div class="form-group">
@@ -40,27 +32,16 @@
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
-       
-
-
-
-
+ 
         <div class="form-group">
             <label for="password_confirmation">Confirme a Senha</label>
             <input type="password" name="password_confirmation" class="form-control" required>
         </div>
-       
-
-
-
-
 
 
         <button type="submit" class="btn btn-primary">Registrar-se</button>
     </form>
 </div>
-
-
 
 
 @endsection
