@@ -16,11 +16,13 @@ class ProdutosMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check() && Auth::user()->tipo_usuario === 'administrador')
+        if(Auth::check() && Auth::user()->tipo_usuario === 'administrador') {
         return $next($request);
+        } else {
         //se não for uma empresa, redireciona com uma mensagem de erro
-        return redirect()->route('home')->
+        return redirect()->route('/')->
         withErrors(['access' => 'Você não tem permissão para acessar essa área.']);
 
     }
+}
 }
