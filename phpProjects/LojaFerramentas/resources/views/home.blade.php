@@ -2,19 +2,18 @@
 
 
 @section('content')
-<div class="container" style="margin-left:600px">    
+<div class="container">
     <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-            @foreach ($produtos as $index => $produto)            
+            @foreach ($produtos as $index => $produto)
                 <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                    <img src="/assets/img/img{{$index}}.jfif" class="d-block w-50" alt="{{ $produto->nome }}">
+                <img src="/assets/img/img{{$index}}.jfif" style="width:200px" class="d-block w-50" alt="{{ $produto->nome }}">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>{{ $produto->nome }}</h5>
                         <p>{{ $produto->descricao }}</p>
                         <p>Preço: R$ {{ $produto->preco }}</p>
                     </div>
-                </div>      
-                    
+                </div>
             @endforeach
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
@@ -26,5 +25,5 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-</div>
+    </div>
 @endsection
