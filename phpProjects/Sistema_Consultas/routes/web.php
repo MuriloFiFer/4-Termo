@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ConsultaController;
+use App\Http\Controllers\ConsultasController;
 use App\Http\Controllers\HomeController;
-use App\Http\Middleware\ConsultasMiddleware;
 use App\Http\Controllers\DashboardController;
 
 // Página inicial com consultas
@@ -17,7 +17,7 @@ Route::get('/register', [UserController::class, 'showRegistroForm'])->name('regi
 Route::post('/register', [UserController::class, 'registro'])->name('register');
 
 // Rota para exibir o formulário de login
-Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
+Route::get('/login', [UserController::class, 'showLoginForm'])->name('login.form');
 
 // Rota para processar o login
 Route::post('/login', [UserController::class, 'login'])->name('login');
@@ -34,17 +34,17 @@ Route::get('/cliente/dashboard', [DashboardController::class, 'clienteDashboard'
 // Rota do logout
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
-// Rota para Consultas
-Route::resource('consultas', ConsultaController::class)->middleware(ConsultasMiddleware::class)->except('show');
+// Rotas para Consultas
+Route::resource('consultas', ConsultaController::class)->middleware('auth')->except('show');
 
-// Visualização de uma consulta específica
+// Reservar uma consulta
+Route::get('consultas/{id}/reservar', [ConsultaController::class, 'reservar'])->middleware('auth')->name('consultas.reservar');
+
+// Visualizar uma consulta específica
 Route::get('consultas/{consulta}', [ConsultaController::class, 'show'])->middleware('auth')->name('consultas.show');
 
-// Rota para Consultas Reservadas (Admin)
-Route::get('/consultas/reservadas', [ConsultaController::class, 'adminIndex'])->middleware('auth')->name('consultas.adminIndex');
+// Consultas reservadas para o administrador
+Route::get('/admin/consultas-reservadas', [ConsultaController::class, 'adminIndex'])->middleware('auth')->name('consultas.adminIndex');
 
-// Rota para Consultas Reservadas (Cliente)
-Route::get('/consultas/minhas', [ConsultaController::class, 'clienteIndex'])->middleware('auth')->name('consultas.clienteIndex');
-
-// Rota para Reservar uma Consulta (Cliente)
-Route::get('consultas/{id}/reservar', [ConsultaController::class, 'reservar'])->middleware('auth')->name('consultas.reservar');
+// Consultas reservadas para o cliente
+Route::get('/cliente/consultas-reservadas', [ConsultaController::class, 'consultasReservadas'])->middleware('auth')->name('consultas.reservadas');

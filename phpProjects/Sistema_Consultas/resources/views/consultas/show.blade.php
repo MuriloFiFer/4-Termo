@@ -10,9 +10,10 @@
             Consulta #{{ $consulta->id }}
         </div>
         <div class="card-body">
-            <h5 class="card-title">Paciente: {{ $consulta->paciente->name }}</h5>
-            <p class="card-text"><strong>Data:</strong> {{ $consulta->data_hora->format('d/m/Y') }}</p>
-            <p class="card-text"><strong>Hora:</strong> {{ $consulta->data_hora->format('H:i') }}</p>
+            <h5 class="card-title">Paciente: {{ $consulta->paciente ? $consulta->paciente->name : 'Não atribuído' }}</h5>
+            <p class="card-text"><strong>Data:</strong> {{ \Carbon\Carbon::parse($consulta->data)->format('d/m/Y') }}</p>
+            <p class="card-text"><strong>Hora:</strong> {{ \Carbon\Carbon::parse($consulta->hora)->format('H:i') }}</p>
+            <p class="card-text"><strong>Especialidade:</strong> {{ $consulta->especialidade }}</p>
             <p class="card-text"><strong>Status:</strong> {{ ucfirst($consulta->status) }}</p>
             @if($consulta->observacoes)
                 <p class="card-text"><strong>Observações:</strong> {{ $consulta->observacoes }}</p>

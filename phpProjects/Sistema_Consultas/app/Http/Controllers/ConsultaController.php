@@ -8,31 +8,38 @@ use Illuminate\Support\Facades\Auth;
 
 class ConsultaController extends Controller
 {
-    // Lista todas as consultas disponíveis e reservadas
+    /**
+     * Display a listing of the consultations.
+     */
     public function index()
     {
         $consultas = Consulta::where('status', '!=', 'concluida')->get();
         return view('consultas.index', compact('consultas'));
     }
 
-    // Abre o formulário de cadastro de consulta para o administrador
+    /**
+     * Show the form for creating a new consultation.
+     */
     public function create()
     {
         return view('consultas.create');
     }
 
-    // Envia o formulário de cadastro de consulta
+    /**
+     * Store a newly created consultation in storage.
+     */
     public function store(Request $request)
     {
         $request->validate([
-            'data_hora' => 'required|date_format:Y-m-d H:i:s',
-            'medico_id' => 'required|exists:users,id',
+            'data' => 'required|date',
+            'hora' => 'required|date_format:H:i',
             'especialidade' => 'required|string|max:255',
         ]);
 
         Consulta::create([
-            'medico_id' => $request->medico_id,
-            'data_hora' => $request->data_hora,
+            'medico_id' => Auth::id(), // Defina como o médico é atribuído
+            'data' => $request->data,
+            'hora' => $request->hora,
             'especialidade' => $request->especialidade,
             'status' => 'disponivel',
         ]);
@@ -40,10 +47,20 @@ class ConsultaController extends Controller
         return redirect()->route('consultas.index')->with('success', 'Consulta criada com sucesso');
     }
 
-    // Reserva uma consulta pelo cliente
+    /**
+     * Reserve a consultation by the client.
+     */
     public function reservar($id)
     {
-        $consulta = Consulta::where('id', $id)->where('status', 'disponivel')->firstOrFail();
+        $consulta = Consulta::where('id', $id)
+                            ->where('status', 'disponivel')
+                            ->firstOrFail();
+
+        // Confirma que o usuário é um cliente e não pode reservar a mesma consulta mais de uma vez
+        if (Auth::user()->tipo_usuario !== 'cliente') {
+            return redirect()->route('consultas.index')->with('error', 'Você não tem permissão para reservar consultas.');
+        }
+
         $consulta->update([
             'paciente_id' => Auth::id(),
             'status' => 'reservada',
@@ -52,18 +69,22 @@ class ConsultaController extends Controller
         return redirect()->route('consultas.index')->with('success', 'Consulta reservada com sucesso');
     }
 
-    // Mostra o formulário para editar a consulta
+    /**
+     * Show the form for editing the specified consultation.
+     */
     public function edit(Consulta $consulta)
     {
         return view('consultas.edit', compact('consulta'));
     }
 
-    // Atualiza a consulta
+    /**
+     * Update the specified consultation in storage.
+     */
     public function update(Request $request, Consulta $consulta)
     {
         $request->validate([
-            'data_hora' => 'required|date_format:Y-m-d H:i:s',
-            'medico_id' => 'required|exists:users,id',
+            'data' => 'required|date',
+            'hora' => 'required|date_format:H:i',
             'especialidade' => 'required|string|max:255',
         ]);
 
@@ -72,7 +93,9 @@ class ConsultaController extends Controller
         return redirect()->route('consultas.index')->with('success', 'Consulta atualizada com sucesso');
     }
 
-    // Remove a consulta
+    /**
+     * Remove the specified consultation from storage.
+     */
     public function destroy(Consulta $consulta)
     {
         $consulta->delete();
@@ -80,23 +103,31 @@ class ConsultaController extends Controller
         return redirect()->route('consultas.index')->with('success', 'Consulta deletada com sucesso');
     }
 
-    // Mostra uma consulta específica
+    /**
+     * Display the specified consultation.
+     */
     public function show(Consulta $consulta)
     {
         return view('consultas.show', compact('consulta'));
     }
 
-    // Lista todas as consultas reservadas para o administrador
+    /**
+     * Display the list of reserved consultations for the admin.
+     */
     public function adminIndex()
     {
         $consultas = Consulta::where('status', 'reservada')->get();
-        return view('consultas.admin-index', compact('consultas'));
+        return view('admin.dashboard', compact('consultas'));
     }
 
-    // Lista todas as consultas reservadas pelo cliente
-    public function clienteIndex()
+    /**
+     * Display the list of reserved consultations for the client.
+     */
+    public function consultasReservadas()
     {
-        $consultas = Consulta::where('paciente_id', Auth::id())->get();
-        return view('consultas.cliente-index', compact('consultas'));
+        $consultas = Consulta::where('paciente_id', Auth::id())
+                             ->where('status', 'reservada')
+                             ->get();
+        return view('cliente.dashboard', compact('consultas'));
     }
 }

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1 class="my-4">Agendar Consulta</h1>
+        <h1 class="my-4">Agendar Nova Consulta</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -19,11 +19,6 @@
             @csrf
 
             <div class="form-group mb-3">
-                <label for="paciente_nome">Nome do Paciente:</label>
-                <input type="text" name="paciente_nome" id="paciente_nome" class="form-control" placeholder="Nome do Paciente" value="{{ old('paciente_nome') }}" required>
-            </div>
-
-            <div class="form-group mb-3">
                 <label for="data">Data:</label>
                 <input type="date" name="data" id="data" class="form-control" placeholder="Data" value="{{ old('data') }}" required>
             </div>
@@ -34,17 +29,8 @@
             </div>
 
             <div class="form-group mb-3">
-                <label for="descricao">Descrição:</label>
-                <textarea name="descricao" id="descricao" class="form-control" placeholder="Descrição" rows="3">{{ old('descricao') }}</textarea>
-            </div>
-
-            <div class="form-group mb-3">
-                <label for="status">Status:</label>
-                <select name="status" id="status" class="form-control" required>
-                    <option value="pendente" {{ old('status') == 'pendente' ? 'selected' : '' }}>Pendente</option>
-                    <option value="confirmado" {{ old('status') == 'confirmado' ? 'selected' : '' }}>Confirmado</option>
-                    <option value="cancelado" {{ old('status') == 'cancelado' ? 'selected' : '' }}>Cancelado</option>
-                </select>
+                <label for="especialidade">Especialidade:</label>
+                <input type="text" name="especialidade" id="especialidade" class="form-control" placeholder="Especialidade" value="{{ old('especialidade') }}" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Agendar</button>

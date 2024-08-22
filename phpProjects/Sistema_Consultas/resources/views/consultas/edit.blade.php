@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <h1 class="my-4">Agendar Nova Consulta</h1>
+    <h1 class="my-4">Editar Consulta</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -15,18 +15,26 @@
         </div>
     @endif
 
-    <form action="{{ route('consultas.store') }}" method="POST">
+    <form action="{{ route('consultas.update', $consulta->id) }}" method="POST">
         @csrf
+        @method('PUT')
 
         <div class="form-group mb-3">
-            <label for="data_hora">Data e Hora</label>
-            <input type="datetime-local" name="data_hora" id="data_hora" class="form-control @error('data_hora') is-invalid @enderror" value="{{ old('data_hora') }}" required>
-            @error('data_hora')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+            <label for="data">Data:</label>
+            <input type="date" name="data" id="data" class="form-control" value="{{ old('data', $consulta->data) }}" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Salvar</button>
+        <div class="form-group mb-3">
+            <label for="hora">Hora:</label>
+            <input type="time" name="hora" id="hora" class="form-control" value="{{ old('hora', $consulta->hora) }}" required>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="especialidade">Especialidade:</label>
+            <input type="text" name="especialidade" id="especialidade" class="form-control" value="{{ old('especialidade', $consulta->especialidade) }}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Atualizar</button>
     </form>
 </div>
 

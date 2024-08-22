@@ -35,8 +35,8 @@
                 {{-- Mostra o nome do paciente apenas se a consulta estiver reservada --}}
                 <td>{{ $consulta->status === 'reservada' ? $consulta->paciente->name : 'Disponível' }}</td>
                 
-                <td>{{ \Carbon\Carbon::parse($consulta->data_hora)->format('d/m/Y') }}</td>
-                <td>{{ \Carbon\Carbon::parse($consulta->data_hora)->format('H:i') }}</td>
+                <td>{{ \Carbon\Carbon::parse($consulta->data)->format('d/m/Y') }}</td>
+                <td>{{ \Carbon\Carbon::parse($consulta->hora)->format('H:i') }}</td>
                 <td>{{ ucfirst($consulta->status) }}</td>
                 <td>
                     {{-- Ações diferentes para administrador e cliente --}}

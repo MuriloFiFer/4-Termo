@@ -26,14 +26,16 @@
             @foreach ($consultas as $consulta)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ \Carbon\Carbon::parse($consulta->data_hora)->format('d/m/Y') }}</td>
-                <td>{{ \Carbon\Carbon::parse($consulta->data_hora)->format('H:i') }}</td>
+                <td>{{ \Carbon\Carbon::parse($consulta->data)->format('d/m/Y') }}</td>
+                <td>{{ \Carbon\Carbon::parse($consulta->hora)->format('H:i') }}</td>
                 <td>{{ $consulta->especialidade }}</td>
                 <td>{{ ucfirst($consulta->status) }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
+
+    <a class="btn btn-primary mt-3" href="{{ route('consultas.index') }}">Reservar Nova Consulta</a>
 </div>
 
 @endsection
