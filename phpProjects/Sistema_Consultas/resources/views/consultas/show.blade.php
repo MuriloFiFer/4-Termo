@@ -1,36 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <!-- Supondo que você tenha uma imagem para a consulta -->
-                <img src="/assets/img/consulta.png" class="img-fluid" alt="Detalhes da Consulta">
-            </div>
-            <div class="col-md-6">
-                <h2>Consulta com {{ $consulta->paciente_nome }}</h2>
-                <p>Data: {{ $consulta->data }}</p>
-                <p>Hora: {{ $consulta->hora }}</p>
-                <p>Status: {{ $consulta->status }}</p>
-                <p>Descrição: {{ $consulta->descricao }}</p>
 
-                <!-- Supondo que haja uma ação disponível para confirmar ou cancelar a consulta -->
-                <form method="POST" action="{{ route('consultas.update', $consulta->id) }}">
-                    @csrf
-                    @method('PUT')
+<div class="container">
+    <h1 class="my-4">Detalhes da Consulta</h1>
 
-                    <div class="form-group">
-                        <label for="status">Atualizar Status</label>
-                        <select name="status" class="form-control">
-                            <option value="agendada" {{ $consulta->status == 'agendada' ? 'selected' : '' }}>Agendada</option>
-                            <option value="confirmada" {{ $consulta->status == 'confirmada' ? 'selected' : '' }}>Confirmada</option>
-                            <option value="cancelada" {{ $consulta->status == 'cancelada' ? 'selected' : '' }}>Cancelada</option>
-                        </select>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary mt-3">Atualizar Status</button>
-                </form>
-            </div>
+    <div class="card">
+        <div class="card-header">
+            Consulta #{{ $consulta->id }}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Paciente: {{ $consulta->paciente->name }}</h5>
+            <p class="card-text"><strong>Data:</strong> {{ $consulta->data_hora->format('d/m/Y') }}</p>
+            <p class="card-text"><strong>Hora:</strong> {{ $consulta->data_hora->format('H:i') }}</p>
+            <p class="card-text"><strong>Status:</strong> {{ ucfirst($consulta->status) }}</p>
+            @if($consulta->observacoes)
+                <p class="card-text"><strong>Observações:</strong> {{ $consulta->observacoes }}</p>
+            @endif
         </div>
     </div>
+
+    <a href="{{ route('consultas.index') }}" class="btn btn-secondary mt-3">Voltar</a>
+</div>
+
 @endsection

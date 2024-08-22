@@ -54,21 +54,26 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'endereco' => 'nullable|string|max:255',
-            'telefone' => 'nullable|string|max:20',
-            'tipo_usuario' => 'required|string|in:administrador,cliente',
+            'tipo_usuario' => 'nullable|string|in:administrador,cliente', // Nullable porque será cliente por padrão
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'endereco' => $request->endereco,
-            'telefone' => $request->telefone,
-            'tipo_usuario' => $request->tipo_usuario,
+            'tipo_usuario' => $request->tipo_usuario ?? 'cliente', // Define padrão para cliente
         ]);
 
-        return redirect('/dashboard'); // Redireciona para o dashboard ou página inicial apropriada
+        Auth::login($user); // Faz o login automático após o registro
+
+        // Redireciona com base no tipo de usuário
+        if ($user->isAdmin()) {
+            return redirect('/admin/dashboard');
+        } elseif ($user->isCliente()) {
+            return redirect('/cliente/dashboard');
+        }
+
+        return redirect('/dashboard'); // Redirecionamento padrão
     }
 
     // Realizar o logout do usuário
@@ -77,7 +82,7 @@ class UserController extends Controller
         Auth::logout();
 
         $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $request->session()->regenerateToken(); // Corrigido
 
         return redirect('/');
     }

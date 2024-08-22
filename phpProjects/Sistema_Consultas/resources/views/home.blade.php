@@ -1,34 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1 class="my-4">Consultas Recentes</h1>
+<div class="container">
+    <h1>Consultas</h1>
 
-        @if ($consultas->isEmpty())
-            <p>Não há consultas recentes.</p>
-        @else
-            <table class="table table-bordered">
-                <thead>
+    @if ($consultas->isEmpty())
+        <p>Não há consultas disponíveis.</p>
+    @else
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Data e Hora</th>
+                    <th>Especialidade</th>
+                    <th>Paciente</th>
+                    <th>Médico</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($consultas as $consulta)
                     <tr>
-                        <th>ID</th>
-                        <th>Nome do Paciente</th>
-                        <th>Data</th>
-                        <th>Hora</th>
-                        <th>Status</th>
+                        <td>{{ $consulta->data_hora->format('d/m/Y H:i') }}</td>
+                        <td>{{ $consulta->especialidade }}</td>
+                        <td>{{ $consulta->paciente->name }}</td>
+                        <td>{{ $consulta->medico->name }}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach ($consultas as $consulta)
-                        <tr>
-                            <td>{{ $consulta->id }}</td>
-                            <td>{{ $consulta->paciente_nome }}</td>
-                            <td>{{ $consulta->data->format('d/m/Y') }}</td>
-                            <td>{{ $consulta->hora->format('H:i') }}</td>
-                            <td>{{ ucfirst($consulta->status) }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        @endif
-    </div>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
+</div>
 @endsection

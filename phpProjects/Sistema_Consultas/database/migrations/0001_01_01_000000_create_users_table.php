@@ -19,11 +19,10 @@ return new class extends Migration
             $table->string('password');
             $table->string('endereco')->nullable();
             $table->string('telefone')->nullable();
-            $table->enum('tipo_usuario', ['cliente', 'administrador'])->default('cliente');
+            $table->enum('tipo_usuario', ['cliente', 'administrador'])->default('cliente'); // Adicionado campo tipo_usuario
             $table->rememberToken();
             $table->timestamps();
         });
-
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();

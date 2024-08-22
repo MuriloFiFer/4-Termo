@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Consulta;
+use App\Models\Consulta; // Adicione isso para acessar o modelo Consulta
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    /**
+     * Exibe a página inicial.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
-        // Pegue as 5 consultas mais recentes, por exemplo
-        $consultas = Consulta::latest()->take(5)->get();
+        // Obtém todas as consultas
+        $consultas = Consulta::all();
 
-        // Se precisar de mais dados ou informações adicionais, adicione aqui
-        // Exemplo: $usuarios = User::all();
-
+        // Passa a variável $consultas para a view
         return view('home', compact('consultas'));
     }
 }

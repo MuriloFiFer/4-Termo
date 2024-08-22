@@ -1,4 +1,3 @@
-{{-- formularios de cadastro --}}
 @extends('layouts.app')
 
 @section('content')
