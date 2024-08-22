@@ -20,6 +20,7 @@
                 <th>Hora</th>
                 <th>Especialidade</th>
                 <th>Status</th>
+                <th>Ação</th>
             </tr>
         </thead>
         <tbody>
@@ -30,12 +31,17 @@
                 <td>{{ \Carbon\Carbon::parse($consulta->hora)->format('H:i') }}</td>
                 <td>{{ $consulta->especialidade }}</td>
                 <td>{{ ucfirst($consulta->status) }}</td>
+                <td>
+                    @if ($consulta->status == 'disponivel')
+                        <a href="{{ route('consultas.reservar', $consulta->id) }}" class="btn btn-primary">Reservar</a>
+                    @else
+                        N/A
+                    @endif
+                </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-
-    <a class="btn btn-primary mt-3" href="{{ route('consultas.index') }}">Reservar Nova Consulta</a>
 </div>
 
 @endsection

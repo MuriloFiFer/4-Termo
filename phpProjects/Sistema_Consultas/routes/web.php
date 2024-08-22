@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ConsultaController;
-use App\Http\Controllers\ConsultasController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 
@@ -17,7 +16,7 @@ Route::get('/register', [UserController::class, 'showRegistroForm'])->name('regi
 Route::post('/register', [UserController::class, 'registro'])->name('register');
 
 // Rota para exibir o formulário de login
-Route::get('/login', [UserController::class, 'showLoginForm'])->name('login.form');
+Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 
 // Rota para processar o login
 Route::post('/login', [UserController::class, 'login'])->name('login');

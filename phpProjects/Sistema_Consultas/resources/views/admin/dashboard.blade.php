@@ -11,8 +11,6 @@
         </div>
     @endif
 
-    <a class="btn btn-success mb-2" href="{{ route('consultas.create') }}">Agendar Nova Consulta</a>
-
     <h2>Consultas Reservadas</h2>
     <table class="table table-bordered">
         <thead>
@@ -29,7 +27,7 @@
             @foreach ($consultas as $consulta)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $consulta->paciente ? $consulta->paciente->name : 'Não atribuído' }}</td>
+                <td>{{ $consulta->paciente ? $consulta->paciente->name : 'N/A' }}</td>
                 <td>{{ \Carbon\Carbon::parse($consulta->data)->format('d/m/Y') }}</td>
                 <td>{{ \Carbon\Carbon::parse($consulta->hora)->format('H:i') }}</td>
                 <td>{{ $consulta->especialidade }}</td>
@@ -38,6 +36,9 @@
             @endforeach
         </tbody>
     </table>
+
+    <!-- Adicione o botão de criar consulta -->
+    <a href="{{ route('consultas.create') }}" class="btn btn-primary">Adicionar Consulta</a>
 </div>
 
 @endsection
