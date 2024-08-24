@@ -20,17 +20,26 @@
 
             <div class="form-group mb-3">
                 <label for="data">Data:</label>
-                <input type="date" name="data" id="data" class="form-control" placeholder="Data" value="{{ old('data') }}" required>
+                <input type="date" name="data" id="data" class="form-control" value="{{ old('data') }}" required>
+                @error('data')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group mb-3">
                 <label for="hora">Hora:</label>
-                <input type="time" name="hora" id="hora" class="form-control" placeholder="Hora" value="{{ old('hora') }}" required>
+                <input type="time" name="hora" id="hora" class="form-control" value="{{ old('hora') }}" required>
+                @error('hora')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group mb-3">
                 <label for="especialidade">Especialidade:</label>
-                <input type="text" name="especialidade" id="especialidade" class="form-control" placeholder="Especialidade" value="{{ old('especialidade') }}" required>
+                <input type="text" name="especialidade" id="especialidade" class="form-control" value="{{ old('especialidade') }}" required>
+                @error('especialidade')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <button type="submit" class="btn btn-primary">Agendar</button>

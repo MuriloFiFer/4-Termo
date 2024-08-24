@@ -19,10 +19,28 @@
             <tbody>
                 @foreach ($consultas as $consulta)
                     <tr>
-                        <td>{{ $consulta->data_hora->format('d/m/Y H:i') }}</td>
+                        <td>
+                            @if ($consulta->data && $consulta->hora)
+                                {{ \Carbon\Carbon::parse($consulta->data . ' ' . $consulta->hora)->format('d/m/Y H:i') }}
+                            @else
+                                Data e Hora inválidas
+                            @endif
+                        </td>
                         <td>{{ $consulta->especialidade }}</td>
-                        <td>{{ $consulta->paciente->name }}</td>
-                        <td>{{ $consulta->medico->name }}</td>
+                        <td>
+                            @if ($consulta->paciente)
+                                {{ $consulta->paciente->name }}
+                            @else
+                                Paciente não disponível
+                            @endif
+                        </td>
+                        <td>
+                            @if ($consulta->medico)
+                                {{ $consulta->medico->name }}
+                            @else
+                                Médico não disponível
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

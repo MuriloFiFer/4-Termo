@@ -14,6 +14,7 @@ class CreateConsultasTable extends Migration
             $table->foreignId('medico_id')->nullable()->constrained('users')->onDelete('set null');
             $table->date('data');
             $table->time('hora');
+            $table->string('especialidade');
             $table->enum('status', ['disponivel', 'reservada', 'concluida'])->default('disponivel');
             $table->timestamps();
         });

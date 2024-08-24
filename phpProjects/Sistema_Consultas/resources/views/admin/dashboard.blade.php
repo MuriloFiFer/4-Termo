@@ -38,7 +38,7 @@
     </table>
 
     <!-- Adicione o botão de criar consulta -->
-    <a href="{{ route('consultas.create') }}" class="btn btn-primary">Adicionar Consulta</a>
-</div>
+<!--  <a href="{{ route('consultas.create') }}" class="btn btn-primary">Adicionar Consulta</a>
+</div>  -->
 
 @endsection

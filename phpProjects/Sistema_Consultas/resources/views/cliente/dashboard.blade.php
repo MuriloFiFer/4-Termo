@@ -11,37 +11,57 @@
         </div>
     @endif
 
-    <h2>Minhas Consultas</h2>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Data</th>
-                <th>Hora</th>
-                <th>Especialidade</th>
-                <th>Status</th>
-                <th>Ação</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($consultas as $consulta)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ \Carbon\Carbon::parse($consulta->data)->format('d/m/Y') }}</td>
-                <td>{{ \Carbon\Carbon::parse($consulta->hora)->format('H:i') }}</td>
-                <td>{{ $consulta->especialidade }}</td>
-                <td>{{ ucfirst($consulta->status) }}</td>
-                <td>
-                    @if ($consulta->status == 'disponivel')
-                        <a href="{{ route('consultas.reservar', $consulta->id) }}" class="btn btn-primary">Reservar</a>
-                    @else
-                        N/A
-                    @endif
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    @if ($consultas->isEmpty())
+        <p>Você não tem consultas agendadas.</p>
+    @else
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Data e Hora</th>
+                    <th>Especialidade</th>
+                    <th>Paciente</th>
+                    <th>Médico</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($consultas as $consulta)
+                    <tr>
+                        <td>
+                            @if ($consulta->data && $consulta->hora)
+                                {{ \Carbon\Carbon::parse($consulta->data . ' ' . $consulta->hora)->format('d/m/Y H:i') }}
+                            @else
+                                Data e Hora inválidas
+                            @endif
+                        </td>
+                        <td>{{ $consulta->especialidade }}</td>
+                        <td>
+                            @if ($consulta->paciente)
+                                {{ $consulta->paciente->name }}
+                            @else
+                                Paciente não disponível
+                            @endif
+                        </td>
+                        <td>
+                            @if ($consulta->medico)
+                                {{ $consulta->medico->name }}
+                            @else
+                                Médico não disponível
+                            @endif
+                        </td>
+                        <td>
+                            @if ($consulta->status == 'disponivel')
+                                <a href="{{ route('consultas.reservar', $consulta->id) }}" class="btn btn-primary">Confirmar</a>
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
+
+    <a href="{{ route('consultas.create') }}" class="btn btn-primary">Adicionar Consulta</a>
+  
 </div>
 
 @endsection

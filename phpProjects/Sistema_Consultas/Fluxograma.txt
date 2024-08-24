@@ -1,0 +1,17 @@
+[Login] -> [Tipo de Usuário]
+                     |
+                [Admin]   [Cliente]
+                   |         |
+           [Dashboard Admin] [Dashboard Cliente]
+                   |         |
+    [Listar Consultas]  [Agendar Consulta]
+                   |         |
+     [Consultas Listadas]  [Formulario de Agendamento]
+                        |
+               [Consulta Disponível?]
+                    /      \
+                  Sim       Não
+                  |          |
+    [Consulta Reservada] [Mensagem de Erro]
+                       |
+                    [Logout]

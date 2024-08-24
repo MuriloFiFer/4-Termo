@@ -34,7 +34,7 @@ Route::get('/cliente/dashboard', [DashboardController::class, 'clienteDashboard'
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 // Rotas para Consultas
-Route::resource('consultas', ConsultaController::class)->middleware('auth')->except('show');
+Route::resource('/consultas', ConsultaController::class)->middleware('auth')->except('show');
 
 // Reservar uma consulta
 Route::get('consultas/{id}/reservar', [ConsultaController::class, 'reservar'])->middleware('auth')->name('consultas.reservar');
@@ -47,3 +47,5 @@ Route::get('/admin/consultas-reservadas', [ConsultaController::class, 'adminInde
 
 // Consultas reservadas para o cliente
 Route::get('/cliente/consultas-reservadas', [ConsultaController::class, 'consultasReservadas'])->middleware('auth')->name('consultas.reservadas');
+
+Route::post('/consultas', [ConsultaController::class, 'store'])->name('consultas.store');

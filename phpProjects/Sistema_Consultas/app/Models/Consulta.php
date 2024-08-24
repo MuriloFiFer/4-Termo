@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Consulta extends Model
 {
@@ -11,12 +12,12 @@ class Consulta extends Model
 
     // Definição dos campos que podem ser preenchidos em massa
     protected $fillable = [
+        'data',
+        'hora',
+        'especialidade',
+        'status',
         'paciente_id',
         'medico_id',
-        'especialidade',
-        'data_hora',
-        'status',
-        'observacoes'
     ];
 
     // Relacionamento com o modelo Paciente
@@ -25,21 +26,19 @@ class Consulta extends Model
         return $this->belongsTo(User::class, 'paciente_id');
     }
 
-    // Relacionamento com o modelo Médico
     public function medico()
     {
         return $this->belongsTo(User::class, 'medico_id');
     }
 
-    // Opcional: Escopo para consultas disponíveis
-    public function scopeDisponivel($query)
+    public function getDataHoraAttribute()
     {
-        return $query->where('status', 'disponivel');
-    }
-
-    // Opcional: Escopo para consultas reservadas
-    public function scopeReservada($query)
-    {
-        return $query->where('status', 'reservada');
+        // Verifica se data e hora não são nulos e combina os dois
+        if ($this->data && $this->hora) {
+            return \Carbon\Carbon::createFromFormat('Y-m-d H:i', $this->data . ' ' . $this->hora);
+        }
+        return null;
     }
 }
+
+
