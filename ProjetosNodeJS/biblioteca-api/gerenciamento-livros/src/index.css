@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: aliceblue;
+  display: flex; 
+  margin-top: 15px;
+  margin-left: 15px;
+  justify-content: center;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.botao-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50; /* Cor de fundo */
+  color: white; /* Cor do texto */
+  text-align: center; /* Centraliza o texto */
+  text-decoration: none; /* Remove o sublinhado para links */
+  border-radius: 5px; /* Bordas arredondadas */
+  font-size: 16px; /* Tamanho da fonte */
+  transition: background-color 0.3s; /* Transição suave ao passar o mouse */
+  cursor: pointer; /* Adiciona um cursor de pointer para o botão */
+  border: none; /* Remove a borda padrão dos botões */
+  margin-left: 50px;
+}
+
+.botao-link:hover {
+  background-color: #45a049; /* Cor de fundo ao passar o mouse */
+}
+
+.botao-delete {
+  background-color: #f44336; /* Cor de fundo vermelho */
+}
+
+.botao-delete:hover {
+  background-color: #e53935; /* Cor de fundo vermelho mais escuro ao passar o mouse */
+}
+
+#AddLink {
+  margin-left: 5px;
+  text-decoration: none;
+  color: rgb(184, 13, 13);
+}
+
+#divLista {   
+  height: 1000px;
+  width: 650px;
+}
+
+#divLista ul {
+  list-style-type: none; /* Remove os marcadores de lista padrão */
+  padding: 0;
+  justify-content: space-around;
+  height: 500px;
+}
+
+#divLista ul li {
+  margin-bottom: 15px; /* Espaço entre os itens da lista */
+  padding: 10px;
+  border: 1px solid #ddd; /* Adiciona uma borda ao redor de cada item da lista */
+  border-radius: 5px; /* Bordas arredondadas */
+  background-color: #f9f9f9; /* Cor de fundo para os itens da lista */
+}
