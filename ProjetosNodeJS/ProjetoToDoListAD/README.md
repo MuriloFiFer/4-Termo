@@ -143,25 +143,23 @@ Um cronograma detalhado será criado utilizando o diagrama de Gantt, com as segu
 | métodos. É fundamental para  |
 | a modelagem do sistema no    |
 | back-end.                    |
-|-----------------------------|
+|------------------------------|
 
-|-----------------------------|
+|------------------------------|
 | **Elementos Principais**     |
-|-----------------------------|
+|------------------------------|
 | **Classes:**                 |
-|-----------------------------|
-| **User:**                    |
+|------------------------------|
+| **Usuario:**                 |
 |   - **Atributos:**           |
 |     - `id`                   |
-|     - `name`                 |
+|     - `nome`                 |
 |     - `email`                |
-|     - `password`             |
+|     - `senha`                |
 |   - **Métodos:**             |
-|     - `register()`           |
+|     - `registro()`           |
 |     - `login()`              |
-|     - `updateProfile()`      |
-|     - `getTaskHistory()`     |
-|-----------------------------|
+|------------------------------|
 | **Task:**                    |
 |   - **Atributos:**           |
 |     - `id`                   |
@@ -178,7 +176,7 @@ Um cronograma detalhado será criado utilizando o diagrama de Gantt, com as segu
 |     - `deleteTask()`         |
 |     - `markAsCompleted()`    |
 |     - `filterTasks()`        |
-|-----------------------------|
+|------------------------------|
 | **Notification:**            |
 |   - **Atributos:**           |
 |     - `id`                   |
@@ -212,7 +210,12 @@ Um cronograma detalhado será criado utilizando o diagrama de Gantt, com as segu
   - **Autenticação:** JWT
   - **Deploy:** AWS ou Heroku
 
-## 7. Observações
+## 7. Prototipagem
+![Protipo](img/prototipo/PagLogin.png)
+![Protipo](img/prototipo/PagHome.png)
+
+
+## 8. Observações
 Este escopo será atualizado conforme o andamento do projeto e novas necessidades sejam identificadas. O progresso será documentado e acompanhado através do repositório no GitHub, onde serão mantidos todos os registros e artefatos do projeto.
 
 
