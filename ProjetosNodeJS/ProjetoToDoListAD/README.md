@@ -59,9 +59,9 @@ Um cronograma detalhado será criado utilizando o diagrama de Gantt, com as segu
 
 ## 4.2 Diagrama de Casos de Uso
 
-|-----------------------------|
+|------------------------------|
 | **Descrição Geral**          |
-|-----------------------------|
+|------------------------------|
 | O Diagrama de Casos de Uso   |
 | apresenta as principais      |
 | interações dos usuários com  |
@@ -71,11 +71,11 @@ Um cronograma detalhado será criado utilizando o diagrama de Gantt, com as segu
 | casos de uso que descrevem   |
 | as funcionalidades que eles  |
 | podem acessar.               |
-|-----------------------------|
+|------------------------------|
 
-|-----------------------------|
+|------------------------------|
 | **Elementos Principais**     |
-|-----------------------------|
+|------------------------------|
 | **Usuários:**                |
 | - **Usuário:** Representa    |
 | qualquer colaborador da      |
@@ -84,7 +84,7 @@ Um cronograma detalhado será criado utilizando o diagrama de Gantt, com as segu
 | - **Admin:** Usuário com     |
 | permissões especiais para    |
 | gerenciar a aplicação.       |
-|-----------------------------|
+|------------------------------|
 | **Casos de Uso:**            |
 | - **Registrar:** O usuário   |
 | pode se registrar na         |
@@ -117,10 +117,10 @@ Um cronograma detalhado será criado utilizando o diagrama de Gantt, com as segu
 | tarefas concluídas ou        |
 | pendentes.                   |
 | - **Gerenciar Perfil:**      |
-|   - **Atualizar Informações:** |
+| - **Atualizar Informações:** |
 |   O usuário pode atualizar   |
-|   nome, e-mail e senha.      |
-|   - **Visualizar Histórico:** |
+|   nome, e-mail e senha.      | 
+|  - **Visualizar Histórico:** |
 |   O usuário pode ver o       |
 |   histórico de tarefas       |
 |   concluídas.                |
@@ -128,13 +128,13 @@ Um cronograma detalhado será criado utilizando o diagrama de Gantt, com as segu
 | O usuário recebe alertas     |
 | sobre tarefas próximas do    |
 | prazo de conclusão.          |
-|-----------------------------|
+|------------------------------|
 
 ## 4.3 Diagrama de Classes
 
-|-----------------------------|
+|------------------------------|
 | **Descrição Geral**          |
-|-----------------------------|
+|------------------------------|
 | O Diagrama de Classes        |
 | representa a estrutura de    |
 | classes no sistema,          |
@@ -186,7 +186,7 @@ Um cronograma detalhado será criado utilizando o diagrama de Gantt, com as segu
 |     - `sentAt`               |
 |   - **Métodos:**             |
 |     - `sendNotification()`   |
-|-----------------------------|
+|------------------------------|
 
 
 
