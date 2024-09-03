@@ -56,9 +56,139 @@ Um cronograma detalhado será criado utilizando o diagrama de Gantt, com as segu
 ## 4.1 Diagrama de Fluxo
 ![Diagrama de Gantt](img/Cronograma-Gantt.JPEG)
 
-## 4.1 Diagrama de Casos de Uso
 
-## 4.1 Diagrama de Classes
+## 4.2 Diagrama de Casos de Uso
+
+|-----------------------------|
+| **Descrição Geral**          |
+|-----------------------------|
+| O Diagrama de Casos de Uso   |
+| apresenta as principais      |
+| interações dos usuários com  |
+| a aplicação. Neste diagrama, |
+| estão representados os       |
+| diferentes usuários e os     |
+| casos de uso que descrevem   |
+| as funcionalidades que eles  |
+| podem acessar.               |
+|-----------------------------|
+
+|-----------------------------|
+| **Elementos Principais**     |
+|-----------------------------|
+| **Usuários:**                |
+| - **Usuário:** Representa    |
+| qualquer colaborador da      |
+| Escola SENAI que utiliza a   |
+| aplicação.                   |
+| - **Admin:** Usuário com     |
+| permissões especiais para    |
+| gerenciar a aplicação.       |
+|-----------------------------|
+| **Casos de Uso:**            |
+| - **Registrar:** O usuário   |
+| pode se registrar na         |
+| aplicação criando uma nova   |
+| conta.                       |
+| - **Login:** Autenticação do |
+| usuário utilizando e-mail e  |
+| senha.                       |
+| - **Gerenciar Tarefas:**     |
+|   - **Criar Tarefa:** O      |
+|   usuário pode criar uma     |
+|   nova tarefa na sua lista.  |
+|   - **Editar Tarefa:** O     |
+|   usuário pode modificar uma |
+|   tarefa existente.          |
+|   - **Excluir Tarefa:** O    |
+|   usuário pode remover uma   |
+|   tarefa da lista.           |
+|   - **Marcar Tarefa como     |
+|   Concluída:** O usuário     |
+|   pode marcar uma tarefa     |
+|   como finalizada.           |
+| - **Organizar Tarefas:** O   |
+| usuário pode organizar       |
+| tarefas por prioridade e     |
+| prazo.                       |
+| - **Filtrar Tarefas:** O     |
+| usuário pode aplicar filtros |
+| para visualizar apenas       |
+| tarefas concluídas ou        |
+| pendentes.                   |
+| - **Gerenciar Perfil:**      |
+|   - **Atualizar Informações:** |
+|   O usuário pode atualizar   |
+|   nome, e-mail e senha.      |
+|   - **Visualizar Histórico:** |
+|   O usuário pode ver o       |
+|   histórico de tarefas       |
+|   concluídas.                |
+| - **Receber Notificações:**  |
+| O usuário recebe alertas     |
+| sobre tarefas próximas do    |
+| prazo de conclusão.          |
+|-----------------------------|
+
+## 4.3 Diagrama de Classes
+
+|-----------------------------|
+| **Descrição Geral**          |
+|-----------------------------|
+| O Diagrama de Classes        |
+| representa a estrutura de    |
+| classes no sistema,          |
+| mostrando as relações entre  |
+| elas, seus atributos e       |
+| métodos. É fundamental para  |
+| a modelagem do sistema no    |
+| back-end.                    |
+|-----------------------------|
+
+|-----------------------------|
+| **Elementos Principais**     |
+|-----------------------------|
+| **Classes:**                 |
+|-----------------------------|
+| **User:**                    |
+|   - **Atributos:**           |
+|     - `id`                   |
+|     - `name`                 |
+|     - `email`                |
+|     - `password`             |
+|   - **Métodos:**             |
+|     - `register()`           |
+|     - `login()`              |
+|     - `updateProfile()`      |
+|     - `getTaskHistory()`     |
+|-----------------------------|
+| **Task:**                    |
+|   - **Atributos:**           |
+|     - `id`                   |
+|     - `title`                |
+|     - `description`          |
+|     - `dueDate`              |
+|     - `priority`             |
+|     - `status` (pendente/    |
+|       concluída)             |
+|     - `userId`               |
+|   - **Métodos:**             |
+|     - `createTask()`         |
+|     - `editTask()`           |
+|     - `deleteTask()`         |
+|     - `markAsCompleted()`    |
+|     - `filterTasks()`        |
+|-----------------------------|
+| **Notification:**            |
+|   - **Atributos:**           |
+|     - `id`                   |
+|     - `message`              |
+|     - `taskId`               |
+|     - `userId`               |
+|     - `sentAt`               |
+|   - **Métodos:**             |
+|     - `sendNotification()`   |
+|-----------------------------|
 
 
 
@@ -84,3 +214,6 @@ Um cronograma detalhado será criado utilizando o diagrama de Gantt, com as segu
 
 ## 7. Observações
 Este escopo será atualizado conforme o andamento do projeto e novas necessidades sejam identificadas. O progresso será documentado e acompanhado através do repositório no GitHub, onde serão mantidos todos os registros e artefatos do projeto.
+
+
+
