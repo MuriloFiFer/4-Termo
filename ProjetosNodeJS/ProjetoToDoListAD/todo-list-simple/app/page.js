@@ -35,12 +35,12 @@ export default function Home() {
   };
 
 
-  const deleteTodo = async (id) => {
-    await fetch(`/api/todos/${id}`, {
-      method: 'DELETE',
-    });
-    setTodos(todos.filter((todo) => todo._id !== id));
-  };
+  // const deleteTodo = async (id) => {
+  //   await fetch(`/api/todos/${id}`, {
+  //     method: 'DELETE',
+  //   });
+  //   setTodos(todos.filter((todo) => todo._id !== id));
+  // };
 
 
   return (
