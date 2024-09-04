@@ -4,9 +4,13 @@
 import { useState, useEffect } from 'react';
 
 
+
+
 export default function Home() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState('');
+
+
 
 
   useEffect(() => {
@@ -14,11 +18,15 @@ export default function Home() {
   }, []);
 
 
+
+
   const fetchTodos = async () => {
     const response = await fetch('/api/todos');
     const data = await response.json();
     setTodos(data.data);
   };
+
+
 
 
   const addTodo = async () => {
@@ -35,12 +43,31 @@ export default function Home() {
   };
 
 
-  // const deleteTodo = async (id) => {
-  //   await fetch(`/api/todos/${id}`, {
-  //     method: 'DELETE',
-  //   });
-  //   setTodos(todos.filter((todo) => todo._id !== id));
-  // };
+
+
+  const deleteTodo = async (id) => {
+    await fetch(`/api/todos/${id}`, {
+      method: 'DELETE',
+    });
+    setTodos(todos.filter((todo) => todo._id !== id));
+  };
+
+
+// criar método put
+  const updateTodo = async (id, currentStatus) =>{
+    const response = await fetch(`/api/todos/${id}`,{
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ completed:!currentStatus }),
+      });
+      const data = await response.json();
+      setTodos(
+        todos.map((todo)=>todo._id===id? data.data : todo)
+      );
+      // fetchTodos();
+  }
 
 
   return (
@@ -55,7 +82,12 @@ export default function Home() {
       <ul>
         {todos.map((todo) => (
           <li key={todo._id}>
-            {todo.title}
+            {todo.title} - {todo.completed ? ' Concluído ':' Pendente '}
+            <input
+            type="checkbox"
+            checked = {todo.completed}
+            onChange = {()=>updateTodo(todo._id,todo.completed)} />
+            {/* button - concluida - lança o método para editar todo*/}
             <button onClick={() => deleteTodo(todo._id)}>Excluir</button>
           </li>
         ))}
