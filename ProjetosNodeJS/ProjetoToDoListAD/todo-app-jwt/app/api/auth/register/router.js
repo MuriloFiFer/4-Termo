@@ -1,15 +1,39 @@
-import User from "@/models/User";
-import connectMongo from "@/utils/dbConnect";
+
+import { getTask,createTask } from "@/controllers/TaskController";
 import { NextResponse } from "next/server";
 
 
-export async function POST(request) {
-    const data = await request.json();
-    await connectMongo();
+export async function GET(userId) {
     try {
-        const user = await User.create(data);
-        return NextResponse.json({ success: true , data:user});
+        const tasks = await getTask(userId);
+        return NextResponse.json({
+            success:true,
+            data:tasks
+        });
     } catch (error) {
-        return NextResponse.json({ success: false }, { status: 400 })
+        console.error(error,"Route");
+        return NextResponse.json(
+            {success:false},
+            {status:400}
+        );
     }
+}
+
+
+export async function POST(request) {
+    try {
+        const data = await request.json();
+        const task = await createTask(data);
+        return NextResponse.json({
+            success:true,
+            data:task
+        })
+    } catch (error) {
+        console.error(error,"Route");
+        return NextResponse.json(
+            {success:false},
+            {status:400}
+        );
+    }
+   
 }

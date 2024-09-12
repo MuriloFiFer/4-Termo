@@ -1,3 +1,4 @@
+
 import mongoose from "mongoose";
 
 
@@ -38,4 +39,3 @@ UserSchema.methods.comparePassword = function (candidatePassword) {
   const User = mongoose.models.User || mongoose.model('User', UserSchema);
  
   export default User;
- 

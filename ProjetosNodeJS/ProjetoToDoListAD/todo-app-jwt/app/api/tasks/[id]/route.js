@@ -1,37 +1,29 @@
-import { getTask,createTask } from "@/controllers/TaskController";
-import { NextResponse } from "next/server";
+import { updateTask, deleteTask } from "@/controllers/TaskController"
+import { NextResponse } from "next/server"
 
-export async function GET() {
+
+export async function PUT(request, { params }) {
     try {
-        const tasks = await getTask();
-        return NextResponse.json({
-                success: true,
-                data: tasks
-            })
-    } catch (error) {
-        return NextResponse.json(
-        {success: false},
-        {status:400},       
-        );
-    }
-    };
-
-    export async function POST(request) {
-        try {
-            const data = await request.json();
-            const newTask = await createTask(data);
-            return NextResponse.json({
-                success: true,
-                data: newTask
-            })
-        } catch (error) {
-            console.error(error, "Route");
-            return NextResponse.json(
-            {success: false},
-            {status:400},
-            );
+        const data = await request.json();
+        const task = await updateTask(params.id, data);
+        if (!task) {
+            return NextResponse.json({ success: false }, { status: 400 });
         }
-    };
+        return NextResponse.json({ success: true, data: task });
+    } catch (error) {
+        return NextResponse.json({ success: false }, { status: 400 });
+    }
+}
 
-    
-    
+
+export async function DELETE({params}) {
+    try {
+        const task = await deleteTask(params.id);
+        if (!task) {
+            return NextResponse.json({ success: false }, { status: 400 });
+        }
+        return NextResponse.json({success: true, message: "Deletado com Sucesso"});
+    } catch (error) {
+        return NextResponse.json({ success: false }, { status: 400 });
+    }
+}

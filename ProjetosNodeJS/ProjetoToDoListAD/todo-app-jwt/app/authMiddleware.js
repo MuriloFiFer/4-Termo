@@ -1,4 +1,3 @@
-
 import jwt from "jsonwebtoken";
 import { NextResponse } from 'next/server';
 
@@ -26,5 +25,5 @@ export async function middleware(request) {
 
 
 export const config = {
-  matcher: ['/api/todos/:path*', '/todos/:path*'],
+  matcher: ['/api/tasks/:path*', '/tasks/:path*'],
 };
