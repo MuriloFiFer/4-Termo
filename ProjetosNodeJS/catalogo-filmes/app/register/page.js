@@ -1,8 +1,40 @@
+"use client";
+
+import { useState } from 'react';
 import Image from 'next/image';
-import styles from '../page.module.css'; // Ajuste o caminho conforme necessário
-import Link from 'next/link'; // Importar Link do Next.js para navegação
+import styles from '../page.module.css';
+import Link from 'next/link';
 
 export default function RegisterPage() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage(''); // Limpar a mensagem antes de submeter
+    setError(null); // Limpar o erro antes de submeter
+    
+    try {
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setMessage(data.message); // Mensagem de sucesso
+      } else {
+        setError(data.message); // Exibir mensagem de erro se a resposta não for bem-sucedida
+      }
+    } catch (err) {
+      setError('Ocorreu um erro durante o cadastro. Tente novamente.'); // Capturar erros de rede ou outros
+    }
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -22,24 +54,36 @@ export default function RegisterPage() {
           <Link href="/register">Cadastrar</Link>
         </div>
       </header>
-      
+
       <main className={styles.mainContent}>
         <h1>Cadastrar</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="name">Nome:</label>
-            <input type="text" id="name" placeholder="Digite seu nome" required />
-          </div>
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" placeholder="Digite seu email" required />
+            <label htmlFor="username">Nome de usuário:</label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
           </div>
           <div>
             <label htmlFor="password">Senha:</label>
-            <input type="password" id="password" placeholder="Digite sua senha" required />
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
           </div>
           <button type="submit">Cadastrar</button>
         </form>
+
+        {/* Exibir mensagem de sucesso ou erro */}
+        {message && <p style={{ color: 'green' }}>{message}</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
       </main>
 
       <footer className={styles.footer}>
