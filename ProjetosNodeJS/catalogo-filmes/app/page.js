@@ -1,7 +1,32 @@
+"use client";
+
+import { useEffect, useState } from 'react';
+import styles from './page.module.css'; // Ajuste o caminho do CSS conforme necessário
 import Image from 'next/image';
-import styles from './page.module.css';
 
 export default function HomePage() {
+  const [filmes, setFilmes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchFilmes() {
+      try {
+        const res = await fetch('/api/filmes');
+        if (!res.ok) throw new Error('Erro ao buscar filmes');
+        const data = await res.json();
+        setFilmes(data);
+      } catch (error) {
+        setError('Não foi possível carregar os filmes.');
+        console.error('Erro ao buscar filmes:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchFilmes();
+  }, []);
+
   return (
     <div className={styles.container}>
       {/* Header */}
@@ -25,21 +50,30 @@ export default function HomePage() {
       {/* Main Content */}
       <main className={styles.mainContent}>
         <h1>Filmes Adicionados</h1>
-        <div className={styles.movieList}>
-          <div className={styles.movieItem}>
-            <Image
-              src="/movie-placeholder.jpg"
-              alt="Filme"
-              width={100}
-              height={150}
-            />
-            <div className={styles.movieDetails}>
-              <h2>Nome do Filme</h2>
-              <p>Descrição do filme...</p>
-            
-            </div>
+        {loading ? (
+          <p>Carregando...</p>
+        ) : error ? (
+          <p style={{ color: 'red' }}>{error}</p>
+        ) : filmes.length > 0 ? (
+          <div className={styles.movieList}>
+            {filmes.map((filme) => (
+              <div key={filme._id} className={styles.movieItem}>
+                <Image
+                  src={filme.imagem || '/movie-placeholder.jpg'}
+                  alt={filme.titulo || 'Filme'}
+                  width={100}
+                  height={150}
+                />
+                <div className={styles.movieDetails}>
+                  <h2>{filme.titulo}</h2>
+                  <p>{filme.descricao}</p>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
+        ) : (
+          <p>Nenhum filme disponível.</p>
+        )}
       </main>
 
       {/* Footer */}

@@ -6,8 +6,8 @@ import styles from '../page.module.css';
 import Link from 'next/link';
 
 export default function RegisterPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [nomeUsuario, setNomeUsuario] = useState('');
+  const [senha, setSenha] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState(null);
 
@@ -17,10 +17,10 @@ export default function RegisterPage() {
     setError(null); // Limpar o erro antes de submeter
     
     try {
-      const res = await fetch('/api/register', {
+      const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ nomeUsuario, senha }),
       });
 
       const data = await res.json();
@@ -59,22 +59,22 @@ export default function RegisterPage() {
         <h1>Cadastrar</h1>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="username">Nome de usuário:</label>
+            <label htmlFor="nomeUsuario">Nome de usuário:</label>
             <input
               type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              id="nomeUsuario"
+              value={nomeUsuario}
+              onChange={(e) => setNomeUsuario(e.target.value)}
               required
             />
           </div>
           <div>
-            <label htmlFor="password">Senha:</label>
+            <label htmlFor="senha">Senha:</label>
             <input
               type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              id="senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
               required
             />
           </div>
