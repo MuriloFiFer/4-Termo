@@ -2,25 +2,25 @@ package br.com.dias;
 
 public class ContatoController {
     private Contato[] contatos;
-    private int contadordeContato;
+    private int contadorDeContatos;
 
     public ContatoController(int maxContato) {
 
         maxContato = 100;
 
         contatos = new Contato[maxContato];
-        contadordeContato = 0;
+        contadorDeContatos = 0;
 
     }
 
     public void addContato(Contato contato) throws AgendaCheiaException {
 
-        if (contadordeContato >= contatos.length) {
+        if (contadorDeContatos >= contatos.length) {
             throw new AgendaCheiaException("Agenda Cheia");
         }
         try {
-            contatos[contadordeContato] = contato;
-            contadordeContato++;
+            contatos[contadorDeContatos] = contato;
+            contadorDeContatos++;
             System.out.println("Contato adicionado com sucesso");
         } catch (Exception e) {
             System.err.println(e);
@@ -30,17 +30,17 @@ public class ContatoController {
 
     public void listarContato() {
 
-        if (contadordeContato == 0) {
+        if (contadorDeContatos == 0) {
             System.out.println("Agenda Vazia");
         } else {
-            for (int i = 0; i < contadordeContato; i++) {
+            for (int i = 0; i < contadorDeContatos; i++) {
                 System.out.println(contatos[i].toString());
             }
         }
     }
     // public void buscarNome(String nome) throws ContatoNaoEncontrado{
     //     for (int i = 0; i < contatos.length; i++) {
-    //         if (contadordeContato==0) {
+    //         if (contadorDeContatos==0) {
     //             System.out.println("Agenda Vazia");
     //         }else{
     //             if (contatos[i].getNome().equalsIgnoreCase(nome)) {
@@ -51,7 +51,7 @@ public class ContatoController {
     //     throw new ContatoNaoEncontrado("Contato não encontrado");
     // }
     public Contato buscarContato(String nome) throws ContatoNaoEncontrado{
-        for (int i = 0; i < contadordeContato; i++) {
+        for (int i = 0; i < contadorDeContatos; i++) {
             if (contatos[i].getNome().equalsIgnoreCase(nome)) {
                 return contatos[i];
             }
@@ -59,9 +59,21 @@ public class ContatoController {
         throw new ContatoNaoEncontrado(("Contato não encontrado"));
         
     }
-
-    public void buscarNome(String nomeBuscado) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarNome'");
+ 
+    //remover contato
+    public void removerContato(String nome) throws ContatoNaoEncontrado{
+        boolean encontrado = false;
+        for (int i = 0; i < contadorDeContatos; i++) {
+            if (contatos[i].getNome().equalsIgnoreCase(nome)) {
+                encontrado = true;
+                contatos[i]=contatos[contadorDeContatos-1];
+                contatos[contadorDeContatos-1]=null;
+                contadorDeContatos--;
+            }    
     }
+    if (!encontrado) {
+        throw new ContatoNaoEncontrado("Contato não Encontrado");
 }
+    }
+
+};
