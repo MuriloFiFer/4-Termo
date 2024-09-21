@@ -56,7 +56,7 @@ public class ContatoController {
                 return contatos[i];
             }
         }
-        throw new ContatoNaoEncontrado(("Contato não encontrado"));
+         ContatoNaoEncontrado(("Contato não encontrado"));
         
     }
  
