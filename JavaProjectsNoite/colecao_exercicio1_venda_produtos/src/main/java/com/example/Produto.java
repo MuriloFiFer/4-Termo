@@ -6,15 +6,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @AllArgsConstructor
-@NoArgsConstructor
-@Getter
 @Setter
-public class Pessoa {
-    //atributos
+@Getter
+@NoArgsConstructor
+public class Produto {
     private String nome;
-    private String cpf;
-    //metodo
-    public String exibirInfo(){
-        return "Nome: "+nome+" CPF: "+cpf;
+    private double valor;
+    //toString
+    @Override
+    public String toString(){
+        return "Nome Produto: "+nome +", Valor: "+valor;
     }
 }

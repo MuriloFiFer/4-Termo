@@ -7,14 +7,13 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Setter
-public class Pessoa {
-    //atributos
+@Getter
+public abstract class Produto {
+    // atributos
     private String nome;
-    private String cpf;
-    //metodo
-    public String exibirInfo(){
-        return "Nome: "+nome+" CPF: "+cpf;
-    }
+    private double preco;
+
+    //método abstrato
+    public abstract double calcularPeso(); 
 }
