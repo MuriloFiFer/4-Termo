@@ -57,9 +57,15 @@ public class ContatoController {
             }
         }
          ContatoNaoEncontrado(("Contato não encontrado"));
+        return null;
         
     }
  
+    private void ContatoNaoEncontrado(String string) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'ContatoNaoEncontrado'");
+    }
+
     //remover contato
     public void removerContato(String nome) throws ContatoNaoEncontrado{
         boolean encontrado = false;
