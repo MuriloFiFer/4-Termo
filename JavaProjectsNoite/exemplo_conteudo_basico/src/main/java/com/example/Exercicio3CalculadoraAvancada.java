@@ -8,7 +8,6 @@ public class Exercicio3CalculadoraAvancada {
     double valor2 = 0;
     double resultado = 0;
     int escolha = 0;
-    int operacao = 0;
 
     Scanner sc = new Scanner(System.in);
 
@@ -30,18 +29,17 @@ public class Exercicio3CalculadoraAvancada {
     public double dividir(double a, double b) {
         try {
             this.resultado = a / b;
-        } catch (Exception e) {
+        } catch (ArithmeticException e) {
             System.err.println("Não Dividir por Zero");
         }
         return resultado;
-
     }
 
-    public double raiz(double a) {
+    public double raiz(double a) throws Exception {
+        if (a < 0) {
+            throw new Exception(" Número deve ser maior que Zero");
+        }
         try {
-            if (a < 0) {
-                throw new Exception(" Número deve ser maior que Zero");
-            }
             this.resultado = Math.sqrt(a);
 
         } catch (Exception e) {
@@ -50,51 +48,71 @@ public class Exercicio3CalculadoraAvancada {
         return resultado;
     }
 
-    public void operacoes() {
-        try {
-            
-            while (escolha!=6) {
-            System.out.println("\n--- Calculadora Avançada ---");
-            System.out.println("1. Soma");
-            System.out.println("2. Subtração");
-            System.out.println("3. Multiplicação");
-            System.out.println("4. Divisão");
-            System.out.println("5. Raiz Quadrada");
-            System.out.println("6. Sair");
-            escolha = sc.nextInt();
-            escolhaOperacao();
-            switch (escolha) {
-                case 1:
-                    System.out.println("Resultado = "+soma(valor1, valor2));
-                    break;
-                case 2:
-                    System.out.println("Resultado = "+subtrair(valor1, valor2));
-                    break;
-            
-                default:
-                    break;
-            }
-            }
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
+    public void menu() {
+        System.out.println("\n--- Calculadora Avançada ---");
+        System.out.println("1. Soma");
+        System.out.println("2. Subtração");
+        System.out.println("3. Multiplicação");
+        System.out.println("4. Divisão");
+        System.out.println("5. Raiz Quadrada");
+        System.out.println("6. Sair");
     }
 
-    public void escolhaOperacao(){
-        
-        if (escolha>=1 && escolha<5) {
+
+    public void escolhaOperacao() {
+
+        if (escolha >= 1 && escolha < 5) {
             System.out.println("Digite o valor 1:");
             valor1 = sc.nextDouble();
             System.out.println("Digite o valor 2:");
             valor2 = sc.nextDouble();
-        }else if (escolha == 5) {
+        } else if (escolha == 5) {
             System.out.println("Digite o valor 1:");
             valor1 = sc.nextDouble();
-        }{
+        } else if (escolha ==6) {
             System.out.println("Saindo....");
+        } else{
+            System.out.println("Digite um nº válido");
         }
     }
 
-
+    // calculadora 
+    public void calculadora(){
+        do {
+            menu();
+            try {
+                escolha = sc.nextInt();
+                switch (escolha) {
+                    case 1:
+                        escolhaOperacao();
+                        soma(valor1, valor2);
+                        break;
+                    case 2:
+                        escolhaOperacao();
+                        subtrair(valor1, valor2);
+                        break;
+                    case 3:
+                        escolhaOperacao();
+                        multiplicar(valor1, valor2);
+                        break;
+                    case 4:
+                        escolhaOperacao();
+                        dividir(valor1, valor2);
+                        break;
+                    case 5:
+                        escolhaOperacao();
+                        raiz(valor1);
+                        break;
+                    case 6:
+                        escolhaOperacao();
+                        break;
+                    default:
+                        escolhaOperacao();
+                }
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        } while (escolha!=6);
+    }
 
 }

@@ -19,8 +19,7 @@ public class Main {
                     String cpf = JOptionPane.showInputDialog("Informe CPF do Cliente");
                     String nomeProduto = JOptionPane.showInputDialog("Informe Nome PRoduto");
                     double valorProduto = Double.parseDouble(JOptionPane.showInputDialog(
-                        "Informe o valor do produto"
-                    ));
+                            "Informe o valor do produto"));
                     Produto produto = new Produto(nomeProduto, valorProduto);
                     gv.venda(cpf, produto);
                     break;
@@ -31,9 +30,8 @@ public class Main {
                 case "3":
                     String cpf3 = JOptionPane.showInputDialog("Informe CPF do Cliente");
                     double valorMinimoProduto = Double.parseDouble(JOptionPane.showInputDialog(
-                        "Informe o valor Mínimo de venda por produto"
-                    ));
-                    gv.produtosClienteAcimaDe(cpf3,valorMinimoProduto);
+                            "Informe o valor Mínimo de venda por produto"))
+                    gv.produtosClienteAcimaDe(cpf3, valorMinimoProduto);
                     break;
                 case "4":
                     System.out.println("sair");
