@@ -2,6 +2,8 @@ package com.example;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        UsuarioController uc = new UsuarioController();
+        uc.create(new Usuario("", "Pedro", 35, "Rua a"));
+        uc.read();
     }
 }

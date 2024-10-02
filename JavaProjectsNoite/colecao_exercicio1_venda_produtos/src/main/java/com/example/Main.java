@@ -30,7 +30,7 @@ public class Main {
                 case "3":
                     String cpf3 = JOptionPane.showInputDialog("Informe CPF do Cliente");
                     double valorMinimoProduto = Double.parseDouble(JOptionPane.showInputDialog(
-                            "Informe o valor Mínimo de venda por produto"))
+                            "Informe o valor Mínimo de venda por produto"));
                     gv.produtosClienteAcimaDe(cpf3, valorMinimoProduto);
                     break;
                 case "4":
