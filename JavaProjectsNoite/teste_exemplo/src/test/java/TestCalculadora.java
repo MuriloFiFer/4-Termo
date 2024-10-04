@@ -15,16 +15,18 @@ public class TestCalculadora {
         assertEquals(13, resultado, 0);
     }
 
+    @Test
     public void testSubtrai() {
-        double resultado = cac.subtrai(10, 5);
-        assertEquals(5, resultado, 0);
+        double resultado = cac.subtrai(10, 12);
+        assertEquals(-2, resultado, 0);
     }
 
+    @Test
     public void testMultiplica() {
         double resultado = cac.multiplica(3, 4);
         assertEquals(12, resultado, 0);
     }
-    
+    @Test    
     public void testDivide() {
         double resultado = cac.divide(12, 3);
         assertEquals(4, resultado, 0);
