@@ -57,7 +57,7 @@ public class CalculadoraSimples extends JPanel {
             
             if (comando.matches("\\d")) {
                 displaySimples.setText(displaySimples.getText() + comando);
-            } else if (comando.matches("[+\\-*/]")) {
+            } else if (comando.matches("[\\+-*/]")) {
                 valorAtual = Double.parseDouble(displaySimples.getText());
                 operador = comando;
                 displaySimples.setText("");
