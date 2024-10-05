@@ -1,34 +1,42 @@
-import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 import com.example.Calculadora;
 
 public class TestCalculadora {
     
-    Calculadora cac = new Calculadora();
+    Calculadora calc = new Calculadora();
 
     //Criar os testes
     @Test
     public void testSoma() {
-        double resultado = cac.soma(5, 8);
+        double resultado = calc.soma(5, 8);
         assertEquals(13, resultado, 0);
     }
 
     @Test
     public void testSubtrai() {
-        double resultado = cac.subtrai(10, 12);
+        double resultado = calc.subtrai(10, 12);
         assertEquals(-2, resultado, 0);
     }
 
     @Test
     public void testMultiplica() {
-        double resultado = cac.multiplica(3, 4);
+        double resultado = calc.multiplica(3, 4);
         assertEquals(12, resultado, 0);
     }
     @Test    
-    public void testDivide() {
-        double resultado = cac.divide(12, 3);
-        assertEquals(4, resultado, 0);
+    public void testDivisao() {
+        double resultado = calc.divide(12, 6);
+        assertEquals(2, resultado, 0);
+    }
+
+    @Test
+    public void testDivisaoZero() {
+        // Verifica se a exceção é lançada ao dividir por zero
+        assertThrows(IllegalArgumentException.class, () -> calc.divide(10, 0));
     }
 }
