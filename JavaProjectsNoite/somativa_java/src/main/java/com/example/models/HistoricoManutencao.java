@@ -2,10 +2,14 @@ package com.example.models;
 
 import java.time.LocalDate;
 
+import lombok.AllArgsConstructor;
+
+
+
 public class HistoricoManutencao {  
      
         private String id;
-        private long maquinaID;
+        private String maquinaID;
         private LocalDate data;
         private String tipo;
         private String pecasTrocadas;
@@ -16,8 +20,8 @@ public class HistoricoManutencao {
         public String getID() { return id; }
         public void setID(String value) { this.id = value; }
     
-        public long getMaquinaID() { return maquinaID; }
-        public void setMaquinaID(long value) { this.maquinaID = value; }
+        public String getMaquinaID() { return maquinaID; }
+        public void setMaquinaID(String value) { this.maquinaID = value; }
     
         public LocalDate getData() { return data; }
         public void setData(LocalDate value) { this.data = value; }
