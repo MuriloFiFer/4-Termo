@@ -12,15 +12,15 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class Maquinas {
+public class Maquina {
 
     private String id;
     private String codigo;
     private String nome;
     private String modelo;
     private String fabricante;
-    private LocalDate dataAquisicao;
-    private long tempoVidaEstimado;
+    private String dataAquisicao;
+    private int tempoVidaEstimado;
     private String localizacao;
     private String detalhes;
     private String manual;

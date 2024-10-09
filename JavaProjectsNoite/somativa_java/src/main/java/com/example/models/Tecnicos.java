@@ -16,10 +16,10 @@ public class Tecnicos {
    
         private String id;
         private String maquinaID;
-        private LocalDate data;
+        private String data;
         private String tipo;
         private String pecasTrocadas;
-        private long tempoDeParada;
+        private int tempoDeParada;
         private String tecnicoID;
         private String observacoes;
     
