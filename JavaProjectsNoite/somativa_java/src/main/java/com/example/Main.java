@@ -6,9 +6,8 @@ import com.example.view.SistemaManutencaoGUI;
 
 public class Main {
     public static void main(String[] args) {
-       SwingUtilities.invokeLater(() -> {
-        new SistemaManutencaoGUI().setVisible(true);
-       });
-
+        SwingUtilities.invokeLater(() -> {
+            new SistemaManutencaoGUI().setVisible(true);
+        });
     }
 }

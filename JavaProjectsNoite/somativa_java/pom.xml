@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>somativa_java</artifactId>
+    <artifactId>projeto_sistema_manutencao_somativa</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20240303</version>          
+            <version>20240303</version>
         </dependency>
 
     
