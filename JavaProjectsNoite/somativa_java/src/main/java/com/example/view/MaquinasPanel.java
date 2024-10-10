@@ -18,7 +18,7 @@ public class MaquinasPanel extends JPanel {
     private JTable maquinasTable;
     private DefaultTableModel tableModel;
     private JButton btnSalvarAlteracoes;
-    private JButton btnCadastrarMauqina;
+    private JButton btnCadastrarMaquina;
 
     //construtor
     public MaquinasPanel() {
@@ -50,10 +50,10 @@ public class MaquinasPanel extends JPanel {
         //adicionar os botões
         JPanel painelInferior = new JPanel(new FlowLayout(FlowLayout.CENTER));
         btnCadastrarMaquina = new JButton("Cadastrar");
-        btnCadastrarAlteracoes = new JButton("Salvar");
-        painelInferior.add(btnCadastrarMauqina);
-        painelInferiror.add(btnSalvarAlteracoes); 
-        this.add(painelInferiror,BorderLayout.SOUTH);
+        btnSalvarAlteracoes = new JButton("Salvar");
+        painelInferior.add(btnCadastrarMaquina);
+        painelInferior.add(btnSalvarAlteracoes); 
+        this.add(painelInferior,BorderLayout.SOUTH);
 
         //criar as ActionLisener para Botões]
     }
