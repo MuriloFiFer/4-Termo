@@ -32,5 +32,7 @@ public class SistemaManutencaoGUI extends JFrame {
         tabbedPane.addTab("Manutenções", painelManutencao);
         tabbedPane.addTab("Falhas", painelFalhas);
         tabbedPane.addTab("Técnicos", painelTecnicos);
+
+        this.add(tabbedPane, BorderLayout.CENTER);
     }
 }
