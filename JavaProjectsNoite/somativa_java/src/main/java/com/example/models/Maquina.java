@@ -24,6 +24,10 @@ public class Maquina {
     private String localizacao;
     private String detalhes;
     private String manual;
+    public void setId(Integer valueAt) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setId'");
+    }
 
 
 }

@@ -5,6 +5,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
+
+
 public class SistemaManutencaoGUI extends JFrame {
     private JTabbedPane tabbedPane;
     private JPanel painelMaquinas;
