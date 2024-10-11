@@ -4,7 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.example.models.Maquina;
-
+import com.example.api.ApiConnection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,7 @@ public class MaquinaAPI {
     public static String postMaquina(Maquina maquina) {
         // Constrói um JSON com os dados da máquina
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("id", maquina.getId());
+        jsonObject.put("id", maquina.getCodigo());
         jsonObject.put("codigo", maquina.getCodigo());
         jsonObject.put("nome", maquina.getNome());
         jsonObject.put("modelo", maquina.getModelo());

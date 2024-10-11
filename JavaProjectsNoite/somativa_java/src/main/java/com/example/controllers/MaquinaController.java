@@ -40,11 +40,5 @@ public class MaquinaController {
         maquinas.set(posicao, maquina);  // Atualiza a máquina na posição especificada
     }
 
-    /**
-     * Método Delete - Remove uma máquina da lista
-     * @param posicao A posição da máquina que será removida
-     */
-    public void deleteMaquina(int posicao) {
-        maquinas.remove(posicao);  // Remove a máquina na posição especificada
-    }
+  
 }
