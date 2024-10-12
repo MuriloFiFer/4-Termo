@@ -1,7 +1,5 @@
 package com.example.models;
 
-import java.time.LocalDate;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,10 +9,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-
 public class Maquina {
-
-    private String id;
+    private String id;  // O ID pode ser do tipo String ou Integer
     private String codigo;
     private String nome;
     private String modelo;
@@ -24,13 +20,8 @@ public class Maquina {
     private String localizacao;
     private String detalhes;
     private String manual;
-    public void setId(Integer valueAt) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setId'");
+
+    public void setId(String id) {
+        this.id = id; // Ajuste para aceitar um String
     }
-
-
 }
-
-
-

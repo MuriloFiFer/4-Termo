@@ -110,24 +110,14 @@ public class MaquinasPanel extends JPanel {
                 // Salvar alterações feitas na tabela
                 for (int i = 0; i < tableModel.getRowCount(); i++) {
                     Maquina maquina = new Maquina();
-                    maquina.setId((Integer) tableModel.getValueAt(i, 0));  // Presumindo que o ID é um inteiro
+                    maquina.setId((String) tableModel.getValueAt(i, 0));  // Presumindo que o ID é uma String
                     maquina.setNome((String) tableModel.getValueAt(i, 1));
                     maquina.setFabricante((String) tableModel.getValueAt(i, 2));
                     maquina.setModelo((String) tableModel.getValueAt(i, 3));
                     maquina.setDetalhes((String) tableModel.getValueAt(i, 4));
                     maquina.setLocalizacao((String) tableModel.getValueAt(i, 5));
+                    maquina.setTempoVidaEstimado((Integer) tableModel.getValueAt(i, 6));
 
-                    // Corrigindo a linha 105
-                    Object tempoVidaObj = tableModel.getValueAt(i, 6);
-                    if (tempoVidaObj instanceof Integer) {
-                        maquina.setTempoVidaEstimado((Integer) tempoVidaObj);
-                    } else if (tempoVidaObj instanceof String) {
-                        try {
-                            maquina.setTempoVidaEstimado(Integer.parseInt((String) tempoVidaObj));
-                        } catch (NumberFormatException ex) {
-                            System.err.println("Erro ao converter tempo de vida: " + tempoVidaObj);
-                        }
-                    }
                     maquinaController.updateMaquina(i, maquina); // Método no controlador para atualizar a máquina
                 }
                 JOptionPane.showMessageDialog(MaquinasPanel.this, "Alterações salvas com sucesso!");
