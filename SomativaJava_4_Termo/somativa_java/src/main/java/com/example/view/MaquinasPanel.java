@@ -74,7 +74,6 @@ public class MaquinasPanel extends JPanel {
 
                 if (nome != null && fabricante != null && modelo != null && detalhes != null && localizacao != null && tempoVida != null) {
                     Maquina novaMaquina = new Maquina(); // Presumindo que você tenha um construtor sem parâmetros
-                    
                     novaMaquina.setNome(nome);
                     novaMaquina.setFabricante(fabricante);
                     novaMaquina.setModelo(modelo);

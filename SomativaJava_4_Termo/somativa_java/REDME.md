@@ -226,3 +226,117 @@ O Sistema de Manutenção Preventiva e Corretiva é um software destinado ao ger
 
 
 
+## Manual do Usuário – Sistema de Manutenção de Máquinas
+
+## Introdução
+
+Este manual tem como objetivo orientar o usuário no uso do sistema de **Manutenção de Máquinas**, que permite gerenciar máquinas, registrar falhas, monitorar o histórico de manutenção e gerenciar técnicos responsáveis pelas manutenções. Este sistema foi desenvolvido para facilitar a gestão de manutenção preventiva e corretiva, promovendo um melhor acompanhamento do ciclo de vida das máquinas e das ações corretivas em caso de falhas.
+
+## Funcionalidades do Sistema
+
+1. **Gerenciamento de Máquinas**
+   - Adicionar novas máquinas.
+   - Listar todas as máquinas cadastradas.
+   - Atualizar informações de uma máquina.
+   - Remover máquinas do sistema.
+
+2. **Gerenciamento de Falhas**
+   - Registrar falhas nas máquinas.
+   - Listar falhas já registradas para acompanhamento.
+   
+3. **Gerenciamento do Histórico de Manutenção**
+   - Cadastrar manutenções realizadas nas máquinas.
+   - Visualizar o histórico completo de manutenções preventivas e corretivas.
+   
+4. **Gerenciamento de Técnicos**
+   - Cadastrar técnicos responsáveis pelas manutenções.
+   - Listar e remover técnicos do sistema.
+
+## Navegação e Operações
+
+### 1. **Gerenciamento de Máquinas**
+
+- **Cadastrar uma Máquina**
+  1. No menu principal, selecione a opção "Máquinas".
+  2. Clique em "Adicionar Máquina".
+  3. Preencha as informações requeridas:
+     - Código
+     - Nome
+     - Modelo
+     - Fabricante
+     - Data de Aquisição
+     - Tempo de Vida Estimado
+     - Localização
+     - Detalhes adicionais (como manual da máquina)
+  4. Clique em "Salvar" para adicionar a máquina ao sistema.
+
+- **Listar Máquinas**
+  1. No menu principal, clique em "Máquinas".
+  2. A lista completa de máquinas cadastradas será exibida com suas respectivas informações.
+
+- **Editar Máquina**
+  1. Na lista de máquinas, selecione a máquina que deseja atualizar.
+  2. Altere as informações desejadas e clique em "Salvar".
+
+- **Remover Máquina**
+  1. Selecione a máquina que deseja remover.
+  2. Clique no botão "Excluir". Confirme a remoção.
+
+### 2. **Gerenciamento de Falhas**
+
+- **Registrar Falha**
+  1. No menu, selecione "Falhas".
+  2. Clique em "Adicionar Falha".
+  3. Preencha as informações:
+     - Máquina relacionada
+     - Data da falha
+     - Descrição do problema
+     - Prioridade
+     - Operador responsável
+  4. Clique em "Salvar".
+
+- **Listar Falhas**
+  1. Acesse "Falhas" no menu.
+  2. Uma lista com as falhas registradas será exibida.
+
+### 3. **Gerenciamento do Histórico de Manutenções**
+
+- **Registrar Manutenção**
+  1. No menu, clique em "Histórico de Manutenção".
+  2. Selecione "Adicionar Manutenção".
+  3. Informe os dados necessários:
+     - Máquina relacionada
+     - Data da manutenção
+     - Tipo (Preventiva ou Corretiva)
+     - Peças trocadas (se houver)
+     - Tempo de parada
+     - Técnico responsável
+     - Observações
+  4. Clique em "Salvar".
+
+- **Visualizar Histórico**
+  1. Acesse "Histórico de Manutenção" no menu.
+  2. A lista completa de manutenções será exibida.
+
+### 4. **Gerenciamento de Técnicos**
+
+- **Cadastrar Técnico**
+  1. No menu, selecione "Técnicos".
+  2. Clique em "Adicionar Técnico".
+  3. Preencha as informações:
+     - Nome
+     - Especialidade
+     - Disponibilidade
+  4. Clique em "Salvar".
+
+- **Listar Técnicos**
+  1. Acesse "Técnicos" no menu.
+  2. Uma lista com os técnicos cadastrados será exibida.
+
+- **Remover Técnico**
+  1. Selecione o técnico que deseja remover.
+  2. Clique no botão "Excluir" e confirme a ação.
+
+## Considerações Finais
+
+Este sistema foi projetado para ser intuitivo e eficiente, com o objetivo de facilitar o gerenciamento de máquinas e garantir que as manutenções preventivas e corretivas sejam executadas de forma adequada. Caso surjam dúvidas ou problemas durante o uso, contate o suporte técnico responsável.
