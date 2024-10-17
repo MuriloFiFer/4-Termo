@@ -339,4 +339,4 @@ Este manual tem como objetivo orientar o usuário no uso do sistema de **Manuten
 
 ## Considerações Finais
 
-Este sistema foi projetado para ser intuitivo e eficiente, com o objetivo de facilitar o gerenciamento de máquinas e garantir que as manutenções preventivas e corretivas sejam executadas de forma adequada. Caso surjam dúvidas ou problemas durante o uso, contate o suporte técnico responsável.
+Este sistema foi projetado para ser intuitivo e eficiente, com o objetivo de facilitar o gerenciamento de máquinas e garantir que as manutenções preventivas e corretivas sejam executadas de forma adequada. Caso surjam dúvidas ou problemas durante o uso, contate o suporte técnico responsável..
