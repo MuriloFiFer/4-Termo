@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() async {
-  await Hive.initFlutter();
-  await Hive.openBox('userBox'); // Abre a caixa para armazenar usuários
+void main() {
   runApp(const MyApp());
 }
 
@@ -75,6 +72,14 @@ class RegistrationPage extends StatefulWidget {
 class _RegistrationPageState extends State<RegistrationPage> {
   final _formKey = GlobalKey<FormState>();
   String? _email;
+  String? _password;
+
+  // Função para salvar as credenciais usando shared_preferences
+  Future<void> _saveCredentials(String email, String password) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('email', email);
+    await prefs.setString('password', password);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,13 +110,26 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 },
               ),
               const SizedBox(height: 20),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Digite sua senha'),
+                obscureText: true,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, insira sua senha';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _password = value;
+                },
+              ),
+              const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    // Salvar o e-mail no Hive
-                    UserSession.saveUser(_email!);
-                    // Voltar para a tela inicial
+                    // Salvar o e-mail e a senha localmente
+                    await _saveCredentials(_email!, _password!);
                     Navigator.of(context).pop();
                   }
                 },
@@ -135,6 +153,22 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _loginFormKey = GlobalKey<FormState>();
   String? _loginEmail;
+  String? _loginPassword;
+
+  // Função para carregar as credenciais salvas
+  Future<void> _loadCredentials() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      UserSession.email = prefs.getString('email');
+      UserSession.password = prefs.getString('password');
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCredentials(); // Carregar credenciais ao iniciar a tela de login
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -165,21 +199,35 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
               const SizedBox(height: 20),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Digite sua senha'),
+                obscureText: true,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, insira sua senha';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _loginPassword = value;
+                },
+              ),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   if (_loginFormKey.currentState!.validate()) {
                     _loginFormKey.currentState!.save();
-                    // Verificar se o e-mail está no Hive
-                    if (UserSession.isUserSaved(_loginEmail!)) {
-                      // Navegar para a área do usuário logado
+                    // Verificar se o e-mail e a senha são correspondentes
+                    if (_loginEmail == UserSession.email &&
+                        _loginPassword == UserSession.password) {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => UserArea(email: _loginEmail!),
+                          builder: (context) => UserArea(email: UserSession.email!),
                         ),
                       );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('E-mail não cadastrado.')),
+                        const SnackBar(content: Text('E-mail ou senha incorretos.')),
                       );
                     }
                   }
@@ -208,7 +256,6 @@ class UserArea extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              // Retornar para a tela inicial ao sair
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const HomePage()),
               );
@@ -223,15 +270,8 @@ class UserArea extends StatelessWidget {
   }
 }
 
-// Classe para manter o estado do usuário
+// Classe para manter o estado do usuário (sessão temporária)
 class UserSession {
-  static final Box<String> userBox = Hive.box('userBox');
-
-  static void saveUser(String email) {
-    userBox.put(email, true); // Salva o e-mail como chave no Hive
-  }
-
-  static bool isUserSaved(String email) {
-    return userBox.containsKey(email); // Verifica se o e-mail está salvo
-  }
+  static String? email;
+  static String? password;
 }

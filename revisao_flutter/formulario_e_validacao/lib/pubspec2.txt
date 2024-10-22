@@ -12,9 +12,8 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
 
-  # Dependências para persistência de dados
-  hive: ^2.2.3  # Versão estável mais recente do Hive
-  hive_flutter: ^1.1.0  # Integração do Hive com Flutter
+  # Dependência para persistência de dados com SharedPreferences
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:

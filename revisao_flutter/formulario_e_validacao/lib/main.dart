@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() async {
-  await Hive.initFlutter();
-  await Hive.openBox('userBox'); // Abre a caixa para armazenar usuários
+void main() {
   runApp(const MyApp());
 }
 
+// Widget principal que inicializa o app e define a página inicial (HomePage)
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -19,11 +17,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const HomePage(), // Define HomePage como a tela inicial
     );
   }
 }
 
+// Página inicial que oferece as opções de cadastro e login
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -37,6 +36,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            // Botão para navegar para a página de cadastro
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(
@@ -48,6 +48,7 @@ class HomePage extends StatelessWidget {
               child: const Text('Cadastrar E-mail'),
             ),
             const SizedBox(height: 20),
+            // Botão para navegar para a página de login
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(
@@ -65,6 +66,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
+// Página de cadastro de e-mail e senha
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
 
@@ -75,6 +77,14 @@ class RegistrationPage extends StatefulWidget {
 class _RegistrationPageState extends State<RegistrationPage> {
   final _formKey = GlobalKey<FormState>();
   String? _email;
+  String? _password;
+
+  // Função para salvar as credenciais usando shared_preferences
+  Future<void> _saveCredentials(String email, String password) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('email', email); // Salva o e-mail localmente
+    await prefs.setString('password', password); // Salva a senha localmente
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,13 +95,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
-          key: _formKey,
+          key: _formKey, // Chave global para manipular o formulário
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              // Campo para inserir o e-mail
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Digite seu e-mail'),
                 validator: (value) {
+                  // Validação para garantir que o e-mail seja válido
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira seu e-mail';
                   }
@@ -101,18 +113,34 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   return null;
                 },
                 onSaved: (value) {
-                  _email = value;
+                  _email = value; // Salva o e-mail inserido
                 },
               ),
               const SizedBox(height: 20),
+              // Campo para inserir a senha
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Digite sua senha'),
+                obscureText: true, // Oculta o texto da senha
+                validator: (value) {
+                  // Validação para garantir que a senha não esteja vazia
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, insira sua senha';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _password = value; // Salva a senha inserida
+                },
+              ),
+              const SizedBox(height: 20),
+              // Botão de ação para cadastrar o e-mail e senha
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    // Salvar o e-mail no Hive
-                    UserSession.saveUser(_email!);
-                    // Voltar para a tela inicial
-                    Navigator.of(context).pop();
+                    // Salvar o e-mail e a senha localmente
+                    await _saveCredentials(_email!, _password!);
+                    Navigator.of(context).pop(); // Retorna à tela inicial
                   }
                 },
                 child: const Text('Cadastrar E-mail'),
@@ -125,6 +153,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   }
 }
 
+// Página de login, onde o usuário insere e-mail e senha
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -135,6 +164,23 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _loginFormKey = GlobalKey<FormState>();
   String? _loginEmail;
+  String? _loginPassword;
+
+  // Função para carregar as credenciais salvas
+  Future<void> _loadCredentials() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      // Carrega o e-mail e senha salvos
+      UserSession.email = prefs.getString('email');
+      UserSession.password = prefs.getString('password');
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCredentials(); // Carrega as credenciais ao iniciar a página de login
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,13 +191,15 @@ class _LoginPageState extends State<LoginPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
-          key: _loginFormKey,
+          key: _loginFormKey, // Chave global para manipular o formulário
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              // Campo para inserir o e-mail no login
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Digite seu e-mail'),
                 validator: (value) {
+                  // Validação para garantir que o e-mail seja válido
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira seu e-mail';
                   }
@@ -161,25 +209,43 @@ class _LoginPageState extends State<LoginPage> {
                   return null;
                 },
                 onSaved: (value) {
-                  _loginEmail = value;
+                  _loginEmail = value; // Salva o e-mail inserido no login
                 },
               ),
               const SizedBox(height: 20),
+              // Campo para inserir a senha no login
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Digite sua senha'),
+                obscureText: true, // Oculta o texto da senha
+                validator: (value) {
+                  // Validação para garantir que a senha não esteja vazia
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, insira sua senha';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _loginPassword = value; // Salva a senha inserida no login
+                },
+              ),
+              const SizedBox(height: 20),
+              // Botão para fazer o login
               ElevatedButton(
                 onPressed: () {
                   if (_loginFormKey.currentState!.validate()) {
                     _loginFormKey.currentState!.save();
-                    // Verificar se o e-mail está no Hive
-                    if (UserSession.isUserSaved(_loginEmail!)) {
-                      // Navegar para a área do usuário logado
+                    // Verifica se o e-mail e senha correspondem às credenciais salvas
+                    if (_loginEmail == UserSession.email &&
+                        _loginPassword == UserSession.password) {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => UserArea(email: _loginEmail!),
+                          builder: (context) => UserArea(email: UserSession.email!),
                         ),
                       );
                     } else {
+                      // Exibe uma mensagem de erro se o login falhar
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('E-mail não cadastrado.')),
+                        const SnackBar(content: Text('E-mail ou senha incorretos.')),
                       );
                     }
                   }
@@ -194,6 +260,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
+// Página de área do usuário após o login bem-sucedido
 class UserArea extends StatelessWidget {
   final String email;
 
@@ -205,10 +272,10 @@ class UserArea extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Área do Usuário'),
         actions: [
+          // Botão para fazer logout e voltar para a página inicial
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              // Retornar para a tela inicial ao sair
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const HomePage()),
               );
@@ -223,15 +290,8 @@ class UserArea extends StatelessWidget {
   }
 }
 
-// Classe para manter o estado do usuário
+// Classe para manter o estado do usuário (sessão temporária)
 class UserSession {
-  static final Box<String> userBox = Hive.box('userBox');
-
-  static void saveUser(String email) {
-    userBox.put(email, true as String); // Salva o e-mail como chave no Hive, com um valor booleano
-  }
-
-  static bool isUserSaved(String email) {
-    return userBox.containsKey(email); // Verifica se o e-mail está salvo
-  }
+  static String? email; // E-mail do usuário
+  static String? password; // Senha do usuário
 }
