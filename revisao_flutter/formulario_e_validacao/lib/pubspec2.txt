@@ -1,0 +1,25 @@
+name: formulario_e_validacao
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # Dependências para persistência de dados
+  hive: ^2.2.3  # Versão estável mais recente do Hive
+  hive_flutter: ^1.1.0  # Integração do Hive com Flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
