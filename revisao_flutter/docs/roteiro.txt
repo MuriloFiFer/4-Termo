@@ -1,0 +1,34 @@
+Roteiro para Vídeo-Aula:
+Duração: Aproximadamente 15 minutos.
+
+Introdução (2 minutos):
+Apresente-se e explique o objetivo da aula: introduzir Widgets no Flutter.
+Mencione que os Widgets são a base da interface de usuário no Flutter e que abordaremos tanto widgets estáticos quanto dinâmicos
+
+Parte 1: StatelessWidget e StatefulWidget (5 minutos):
+Explique a diferença entre StatelessWidget e StatefulWidget.
+Mostre exemplos práticos de cada tipo de Widget no código.
+Demonstre como a interface é reconstruída em um StatefulWidget conforme o estado muda.
+
+Parte 2: Layouts com Row, Column e Stack (3 minutos):
+Demonstre como organizar Widgets usando Row, Column e Stack.
+Crie exemplos de layouts simples no código.
+Exemplo de Row: ícones ou botões lado a lado.
+Exemplo de Column: uma lista vertical de itens.
+Exemplo de Stack: sobreposição de uma imagem e texto.
+
+Parte 3: Navegação entre páginas (Navigator) (3 minutos):
+Explique como o Navigator funciona para navegar entre diferentes páginas.
+Mostre um exemplo prático no código, com Navigator.push() para ir a uma nova página e Navigator.pop() para retornar.
+
+Parte 4: Formulários e Validação (2 minutos):
+Apresente o widget Form e o TextFormField.
+Demonstre como validar os campos de um formulário e capturar as entradas.
+Mostre como usar o GlobalKey<FormState> para gerenciar o estado do formulário.
+Conclusão (1 minuto):
+Recapitule os pontos principais da aula: Widgets, Layouts, Navegação e Formulários.
+Dê uma prévia do que será coberto nas próximas aulas (se houver).
+Dicas para gravação do vídeo:
+Utilize um editor de código para demonstrar os exemplos na prática, como o VSCode.
+Grave a tela enquanto escreve e executa o código, explicando cada passo.
+Use um tom didático e vá aos poucos, garantindo que os conceitos sejam explicados de forma clara e objetiva.
