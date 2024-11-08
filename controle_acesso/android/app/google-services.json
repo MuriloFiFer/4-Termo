@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "285911241950",
-    "project_id": "controle-acesso-3d871",
-    "storage_bucket": "controle-acesso-3d871.firebasestorage.app"
+    "project_number": "393186248118",
+    "project_id": "controle-acesso-bf9cf",
+    "storage_bucket": "controle-acesso-bf9cf.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:285911241950:android:badd1d23ea33cbfc821e4f",
+        "mobilesdk_app_id": "1:393186248118:android:5e35687796fd461be3ad17",
         "android_client_info": {
-          "package_name": "somativa.flutter.controleacesso"
+          "package_name": "com.example.controle_acesso"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDyp_AMwV_fFf4u9_j_urD4JArG8IzAofc"
+          "current_key": "AIzaSyD52VigNfFgDPNkokNPGACEDMCdy4BXU9A"
         }
       ],
       "services": {

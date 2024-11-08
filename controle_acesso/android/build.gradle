@@ -1,0 +1,37 @@
+// Definindo repositórios para todas as dependências do projeto
+allprojects {
+    repositories {
+        google() // Repositório do Google
+        mavenCentral() // Repositório Maven Central
+    }
+}
+
+// Diretório de build do projeto root
+rootProject.buildDir = "../build"
+
+// Configurando diretórios de build para subprojetos
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+
+// Avaliando dependências de subprojetos
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+// Tarefa para limpar o diretório de build
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
+
+// Configuração do script de build
+buildscript {
+    repositories {
+        google() // Repositório do Google para dependências do buildscript
+        mavenCentral() // Repositório Maven Central
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.4.2' // Adicione a versão adequada do Gradle
+        classpath 'com.google.gms:google-services:4.3.15' // Verifique se há uma versão mais recente disponível
+    }
+}

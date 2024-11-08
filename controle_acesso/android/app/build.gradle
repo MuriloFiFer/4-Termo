@@ -1,0 +1,47 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin" // O plugin do Flutter deve ser aplicado após os plugins do Android e Kotlin.
+    id "com.google.gms.google-services" // Adicionando o plugin de serviços do Google
+}
+
+android {
+    namespace = "com.example.controle_acesso" // Namespace do aplicativo
+    compileSdk = 34 // Atualizado para SDK 34
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8 // Compatibilidade com Java 8
+        targetCompatibility = JavaVersion.VERSION_1_8 // Compatibilidade com Java 8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8" // Alvo JVM para Kotlin
+    }
+
+    defaultConfig {
+        applicationId = "com.example.controle_acesso" // Application ID único do aplicativo
+        minSdk = 23 // Versão mínima do SDK
+        targetSdk = 34 // Atualizado para SDK 34
+        versionCode = flutter.versionCode // Código da versão (definido pelo Flutter)
+        versionName = flutter.versionName // Nome da versão (definido pelo Flutter)
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug // Usando configuração de assinatura de debug temporariamente
+        }
+    }
+}
+
+flutter {
+    source = "../.." // Caminho para o diretório fonte do Flutter
+}
+
+dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1")) // Importando o BoM do Firebase
+
+    // Dependências para os produtos do Firebase que deseja usar
+    implementation("com.google.firebase:firebase-analytics") // Firebase Analytics
+
+    // Adicione outras dependências do Firebase conforme necessário
+}
