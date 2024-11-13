@@ -131,7 +131,6 @@ Usuário  -> Sistema   -> Firebase
     |<-----------------------|
 ```
 
-
 ## 9. Tutorial de Utilização do Aplicativo
 
 ### 1. Tela Inicial - Home
@@ -154,27 +153,42 @@ Usuário  -> Sistema   -> Firebase
 ### 4. Funcionalidades Pós-Login
 
    #### 4.1. Gerar QR Code
-   - Toque em **Gerar QR Code**.
-   - Insira o **nome** e **CPF** do visitante e toque em **Gerar QR Code**.
+   - Toque em **Gerar QR Code** para acessar a funcionalidade.
+   - Uma nova janela abrirá com os campos para preencher os dados do visitante.
+      - Insira o **nome** e o **CPF** do visitante.
+      - Toque no botão **Gerar QR Code** para gerar o código.
+      - O QR Code gerado será exibido como uma imagem logo abaixo.
+   - Para enviar o QR Code por e-mail, insira um endereço de e-mail no campo **Digite o email para envio** e toque em **Enviar QR Code por e-mail**.
 
    #### 4.2. Ler QR Code
    - Toque em **Ler QR Code**.
-   - Escaneie o QR Code e escolha entre **Liberar Entrada** e **Bloquear Entrada**.
+   - Escaneie o QR Code usando a câmera do dispositivo.
+   - As informações do visitante, como **nome** e **CPF**, serão exibidas após a leitura do código.
+ 
 
 ### 5. Gerenciamento de QR Codes
 
    - Acesse seu perfil e visualize a lista de QR Codes.
-   - Para excluir, toque na opção **Excluir** ao lado do QR Code desejado.
+   - Para excluir um QR Code específico, toque na opção **Excluir** ao lado do código desejado.
 
 ### 6. Encerrar Sessão
 
-   - No perfil, toque em **Logout** para encerrar sua sessão.
+   - No perfil, toque no botão de **Logout** para encerrar sua sessão.
 
 ---
 
 Este guia fornece todas as instruções necessárias para utilizar o aplicativo de controle de acesso de visitantes com QR Code.
 
 
-## 10. Conclusão
+### 10. Testes e Validação
+
+- **Testes de Autenticação**: Validar a criação de contas, login e logout.
+- **Testes de Leitura de QR Code**: Simular a leitura de diferentes tipos de QR Codes e verificar se a validação ocorre corretamente.
+- **Testes de Fluxo de Navegação**: Garantir que a navegação entre as telas (Login, Registro, QR Code, Histórico) funciona sem interrupções.
+  
+A implementação desses testes garante maior confiabilidade e segurança nas funcionalidades principais do aplicativo.
+
+
+## 11. Conclusão
 
 Este documento descreve o escopo, funcionalidades e cronograma do aplicativo de controle de acesso para visitantes. O sistema será implementado com Firebase Authentication e armazenamento seguro dos dados dos visitantes. Ele será lançado como uma versão piloto para testes em 2 meses, com foco em segurança e eficiência.
